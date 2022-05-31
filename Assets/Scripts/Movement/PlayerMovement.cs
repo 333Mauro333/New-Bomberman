@@ -5,6 +5,9 @@ namespace NewBomberman
 {
     public class PlayerMovement : CharacterMovement
     {
+
+
+
         void Update()
         {
             Movement();

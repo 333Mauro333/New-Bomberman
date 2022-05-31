@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\Movement\LimitMovement.cs" />
     <Compile Include="Assets\Scripts\BombGenerator.cs" />
     <Compile Include="Assets\Scripts\Bomb.cs" />
+    <Compile Include="Assets\Scripts\Enums\EnumDirection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

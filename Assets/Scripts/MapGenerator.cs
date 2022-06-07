@@ -25,26 +25,37 @@ namespace NewBomberman
 
         void Awake()
         {
-            blocksMap = new char[mapSize, mapSize] { { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck },
-                                                     { unBck, plyr1, empty, empty, empty, empty, empty, empty, empty, unBck },
-                                                     { unBck, empty, unBck, unBck, empty, empty, unBck, unBck, empty, unBck },
-                                                     { unBck, empty, unBck, empty, empty, empty, empty, unBck, empty, unBck },
-                                                     { unBck, empty, empty, empty, unBck, unBck, empty, empty, empty, unBck },
-                                                     { unBck, empty, empty, empty, unBck, unBck, empty, empty, empty, unBck },
-                                                     { unBck, empty, unBck, empty, empty, empty, empty, unBck, empty, unBck },
-                                                     { unBck, empty, unBck, unBck, empty, empty, unBck, unBck, empty, unBck },
-                                                     { unBck, empty, empty, empty, empty, empty, empty, empty, empty, unBck },
+            //blocksMap = new char[mapSize, mapSize] { { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck },
+            //                                         { unBck, plyr1, empty, empty, empty, empty, empty, empty, empty, unBck },
+            //                                         { unBck, empty, unBck, unBck, empty, empty, unBck, unBck, empty, unBck },
+            //                                         { unBck, empty, unBck, empty, empty, empty, empty, unBck, empty, unBck },
+            //                                         { unBck, empty, empty, empty, unBck, unBck, empty, empty, empty, unBck },
+            //                                         { unBck, empty, empty, empty, unBck, unBck, empty, empty, empty, unBck },
+            //                                         { unBck, empty, unBck, empty, empty, empty, empty, unBck, empty, unBck },
+            //                                         { unBck, empty, unBck, unBck, empty, empty, unBck, unBck, empty, unBck },
+            //                                         { unBck, empty, empty, empty, empty, empty, empty, empty, empty, unBck },
+            //                                         { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck }};
+
+            blocksMap = new char[mapSize, mapSize] { { unBck, empty, empty, empty, empty, empty, empty, empty, empty, empty },
+                                                     { unBck, plyr1, empty, empty, empty, empty, empty, empty, empty, empty },
+                                                     { unBck, unBck, unBck, empty, empty, empty, empty, empty, empty, empty },
+                                                     { unBck, unBck, unBck, unBck, empty, empty, empty, empty, empty, empty },
+                                                     { unBck, unBck, unBck, unBck, unBck, empty, empty, empty, empty, empty },
+                                                     { unBck, unBck, unBck, unBck, unBck, unBck, empty, empty, empty, empty },
+                                                     { unBck, unBck, unBck, unBck, unBck, unBck, unBck, empty, empty, empty },
+                                                     { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, empty, empty },
+                                                     { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, empty },
                                                      { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck }};
         }
         void Start()
         {
             floor.transform.localScale = new Vector3(mapSize, 1.0f, mapSize);
-            floor.transform.position = new Vector3(floor.transform.localScale.x / 2.0f, -floor.transform.localScale.y / 2.0f, -floor.transform.localScale.z / 2.0f);
+            floor.transform.position = new Vector3(0.0f, -floor.transform.localScale.y / 2.0f, 0.0f);
 
             float wBlock = floor.transform.localScale.x / mapSize;
             float dBlock = floor.transform.localScale.z / mapSize;
             float topLeftX = floor.transform.position.x - floor.transform.localScale.x / 2.0f + wBlock / 2.0f;
-            float topLeftZ = floor.transform.position.z - floor.transform.localScale.z / 2.0f + dBlock / 2.0f;
+            float topLeftZ = floor.transform.position.z + floor.transform.localScale.z / 2.0f - dBlock / 2.0f;
 
 
             blocksTable = new GameObject[mapSize, mapSize];
@@ -55,12 +66,12 @@ namespace NewBomberman
                 {
                     if (blocksMap[i, j] != plyr1)
                     {
-                        blocksTable[i, j] = gB(blocksMap[i, j], topLeftX + wBlock * i, topLeftZ + dBlock * j);
+                        blocksTable[i, j] = gB(blocksMap[i, j], topLeftX + wBlock * i, topLeftZ - dBlock * j);
                     }
                     else
                     {
                         float posOnTheFloorY = floor.transform.position.y + floor.transform.localScale.y / 2.0f + player.transform.localScale.y / 2.0f;
-                        player.transform.position = new Vector3(topLeftX + wBlock * i, posOnTheFloorY, -dBlock * j - player.transform.localScale.z / 2.0f);
+                        player.transform.position = new Vector3(topLeftX + wBlock * i, posOnTheFloorY, topLeftZ - dBlock * j);
                     }
                 }
             }

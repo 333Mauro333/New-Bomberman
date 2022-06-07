@@ -6,6 +6,7 @@ namespace NewBomberman
     public class Bomb : MonoBehaviour, IReachable
     {
         [SerializeField] float timeToExplode = 0.0f;
+        [SerializeField] float range = 3.0f;
 
         LineRenderer lR;
 
@@ -19,45 +20,69 @@ namespace NewBomberman
 
         void Start()
         {
-            Debug.Log(transform.position);
-
             lR.SetPosition(0, transform.position);
-            lR.SetPosition(1, new Vector3(transform.position.x + 3.0f, transform.position.y, transform.position.z));
+            lR.SetPosition(1, new Vector3(transform.position.x + range, transform.position.y, transform.position.z));
         }
 
         void Update()
         {
-            CheckTime();
-            ReachRange();
+            SubtractTime();
         }
 
-        void CheckTime()
+        void SubtractTime()
         {
             timeToExplode = (timeToExplode - Time.deltaTime <= 0.0f) ? 0.0f : timeToExplode - Time.deltaTime;
 
             if (timeToExplode <= 0.0f)
             {
+                ReachRange();
                 Destroy(gameObject);
             }
         }
 
 
-        private void OnTriggerEnter(Collider other)
+        public void ReachRange()
         {
-            IDestroyable id = other.GetComponent<IDestroyable>();
+            SearchObjective(Direction.Up);
+            SearchObjective(Direction.Down);
+            SearchObjective(Direction.Left);
+            SearchObjective(Direction.Right);
+        }
 
-            if (timeToExplode <= 0.0f)
+        void SearchObjective(Direction direction)
+        {
+            Vector3 vectorD = Vector3.zero;
+            RaycastHit ray;
+
+
+            switch (direction)
             {
+                case Direction.Up:
+                    vectorD = transform.forward;
+                    break;
+
+                case Direction.Down:
+                    vectorD = -transform.forward;
+                    break;
+
+                case Direction.Left:
+                    vectorD = -transform.right;
+                    break;
+
+                case Direction.Right:
+                    vectorD = transform.right;
+                    break;
+            }
+
+            if (Physics.Raycast(transform.position, vectorD, out ray, range))
+            {
+                IDestroyable id = ray.transform.gameObject.GetComponent<IDestroyable>();
+
                 if (id != null)
                 {
                     id.Destroy();
                 }
             }
-        }
-
-        public void ReachRange()
-        {
-
         }
     }
 }

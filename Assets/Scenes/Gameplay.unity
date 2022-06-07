@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59bfc6493b79cfa47be0ff1c73f17de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBomb: {fileID: 8020367028823583938, guid: 22c08b8ef0ccfba4a9cf1718aace5d43, type: 3}
+  prefabBomb: {fileID: 1873211135738603329, guid: 22c08b8ef0ccfba4a9cf1718aace5d43, type: 3}
   bombButtonName: Player1Bomb
 --- !u!1001 &8746106492016296577
 PrefabInstance:

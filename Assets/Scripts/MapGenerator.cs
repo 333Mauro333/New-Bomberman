@@ -29,7 +29,7 @@ namespace NewBomberman
                                                      { unBck, plyr1, empty, empty, empty, empty, empty, empty, empty, empty },
                                                      { unBck, unBck, unBck, empty, empty, empty, empty, empty, empty, empty },
                                                      { unBck, unBck, unBck, unBck, empty, empty, empty, empty, empty, empty },
-                                                     { unBck, unBck, unBck, unBck, unBck, empty, empty, empty, empty, empty },
+                                                     { brBck, brBck, brBck, brBck, brBck, empty, empty, empty, empty, empty },
                                                      { unBck, unBck, unBck, unBck, unBck, unBck, empty, empty, empty, empty },
                                                      { unBck, unBck, unBck, unBck, unBck, unBck, unBck, empty, empty, empty },
                                                      { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, empty, empty },

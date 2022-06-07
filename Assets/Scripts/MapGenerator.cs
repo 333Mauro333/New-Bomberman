@@ -25,17 +25,6 @@ namespace NewBomberman
 
         void Awake()
         {
-            //blocksMap = new char[mapSize, mapSize] { { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck },
-            //                                         { unBck, plyr1, empty, empty, empty, empty, empty, empty, empty, unBck },
-            //                                         { unBck, empty, unBck, unBck, empty, empty, unBck, unBck, empty, unBck },
-            //                                         { unBck, empty, unBck, empty, empty, empty, empty, unBck, empty, unBck },
-            //                                         { unBck, empty, empty, empty, unBck, unBck, empty, empty, empty, unBck },
-            //                                         { unBck, empty, empty, empty, unBck, unBck, empty, empty, empty, unBck },
-            //                                         { unBck, empty, unBck, empty, empty, empty, empty, unBck, empty, unBck },
-            //                                         { unBck, empty, unBck, unBck, empty, empty, unBck, unBck, empty, unBck },
-            //                                         { unBck, empty, empty, empty, empty, empty, empty, empty, empty, unBck },
-            //                                         { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck }};
-
             blocksMap = new char[mapSize, mapSize] { { unBck, empty, empty, empty, empty, empty, empty, empty, empty, empty },
                                                      { unBck, plyr1, empty, empty, empty, empty, empty, empty, empty, empty },
                                                      { unBck, unBck, unBck, empty, empty, empty, empty, empty, empty, empty },
@@ -78,13 +67,6 @@ namespace NewBomberman
         }
 
 
-        void Update()
-        {
-
-        }
-
-
-
         GameObject gB(char blockType, float x, float z)
         {
             GameObject block = null;
@@ -108,6 +90,7 @@ namespace NewBomberman
                 yOnTheFloor = floor.transform.position.y + floor.transform.localScale.y / 2.0f + block.transform.localScale.y / 2.0f;
                 block.transform.position = new Vector3(x, yOnTheFloor, z);
             }
+
 
             return block;
         }

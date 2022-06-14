@@ -11,7 +11,7 @@ namespace NewBomberman
         LimitMovement lM;
 
 
-        private void Awake()
+        void Awake()
         {
             movementTimer = 1.0f;
             actualTime = movementTimer;
@@ -28,8 +28,32 @@ namespace NewBomberman
         {
             if (actualTime <= 0.0f)
             {
+                Direction randomDirection = (Direction)Random.Range(0, 4);
+
+
                 actualTime = movementTimer;
-                HorizontalMove();
+
+                if (!lM.ThereIsAnything(randomDirection))
+                {
+                    switch (randomDirection)
+                    {
+                        case Direction.Up:
+                            MoveUp();
+                            break;
+
+                        case Direction.Down:
+                            MoveDown();
+                            break;
+
+                        case Direction.Left:
+                            MoveLeft();
+                            break;
+
+                        case Direction.Right:
+                            MoveRight();
+                            break;
+                    }
+                }
             }
             else
             {
@@ -38,28 +62,21 @@ namespace NewBomberman
         }
 
 
-
-        protected override void HorizontalMove()
+        protected override void MoveUp()
         {
-            Direction randomDirection = (Direction)Random.Range(2, 4); // Para el movimiento horizontal (izquierda y derecha).
-
-            if (!lM.ThereIsAnything(randomDirection))
-            {
-                switch (randomDirection)
-                {
-                    case Direction.Left:
-                        transform.position -= Vector3.right;
-                        break;
-
-                    case Direction.Right:
-                        transform.position += Vector3.right;
-                        break;
-                }
-            }
+            transform.position += Vector3.forward;
         }
-        protected override void VerticalMove()
+        protected override void MoveDown()
         {
-
+            transform.position -= Vector3.forward;
+        }
+        protected override void MoveLeft()
+        {
+            transform.position -= Vector3.right;
+        }
+        protected override void MoveRight()
+        {
+            transform.position += Vector3.right;
         }
     }
 }

@@ -25,32 +25,42 @@ namespace NewBomberman
 
         protected override void Movement()
         {
-            HorizontalMove();
-            VerticalMove();
-        }
-        protected override void HorizontalMove()
-        {
-            if (Input.GetButtonDown(leftButtonName) && !lM.ThereIsAnything(Direction.Left))
-            {
-                transform.position += -Vector3.right;
-            }
-
-            if (Input.GetButtonDown(rightButtonName) && !lM.ThereIsAnything(Direction.Right))
-            {
-                transform.position += new Vector3(1.0f, 0.0f, 0.0f);
-            }
-        }
-        protected override void VerticalMove()
-        {
             if (Input.GetButtonDown(upButtonName) && !lM.ThereIsAnything(Direction.Up))
             {
-                transform.position += new Vector3(0.0f, 0.0f, 1.0f);
+                MoveUp();
             }
 
             if (Input.GetButtonDown(downButtonName) && !lM.ThereIsAnything(Direction.Down))
             {
-                transform.position += new Vector3(0.0f, 0.0f, -1.0f);
+                MoveDown();
             }
+
+            if (Input.GetButtonDown(leftButtonName) && !lM.ThereIsAnything(Direction.Left))
+            {
+                MoveLeft();
+            }
+
+            if (Input.GetButtonDown(rightButtonName) && !lM.ThereIsAnything(Direction.Right))
+            {
+                MoveRight();
+            }
+        }
+
+        protected override void MoveUp()
+        {
+            transform.position += new Vector3(0.0f, 0.0f, 1.0f);
+        }
+        protected override void MoveDown()
+        {
+            transform.position += new Vector3(0.0f, 0.0f, -1.0f);
+        }
+        protected override void MoveLeft()
+        {
+            transform.position += -Vector3.right;
+        }
+        protected override void MoveRight()
+        {
+            transform.position += new Vector3(1.0f, 0.0f, 0.0f);
         }
     }
 }

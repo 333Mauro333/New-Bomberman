@@ -11,7 +11,9 @@ namespace NewBomberman
 
 
         protected abstract void Movement();
-        protected abstract void HorizontalMove();
-        protected abstract void VerticalMove();
+        protected abstract void MoveUp();
+        protected abstract void MoveDown();
+        protected abstract void MoveLeft();
+        protected abstract void MoveRight();
     }
 }

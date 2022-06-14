@@ -54,7 +54,6 @@ namespace NewBomberman
                         break;
                 }
             }
-            
         }
         protected override void VerticalMove()
         {

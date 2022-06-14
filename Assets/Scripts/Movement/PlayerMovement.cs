@@ -5,10 +5,10 @@ namespace NewBomberman
 {
     public class PlayerMovement : CharacterMovement
     {
-        [SerializeField] KeyCode up = KeyCode.None;
-        [SerializeField] KeyCode down = KeyCode.None;
-        [SerializeField] KeyCode left = KeyCode.None;
-        [SerializeField] KeyCode right = KeyCode.None;
+        [SerializeField] string upButtonName = "";
+        [SerializeField] string downButtonName = "";
+        [SerializeField] string leftButtonName = "";
+        [SerializeField] string rightButtonName = "";
 
 
         void Update()
@@ -24,24 +24,24 @@ namespace NewBomberman
         }
         protected override void HorizontalMove()
         {
-            if (Input.GetKeyDown(left) && !ThereIsABlock(Direction.Left))
+            if (Input.GetButtonDown(leftButtonName) && !ThereIsABlock(Direction.Left))
             {
                 transform.position += -Vector3.right;
             }
 
-            if (Input.GetKeyDown(right) && !ThereIsABlock(Direction.Right))
+            if (Input.GetButtonDown(rightButtonName) && !ThereIsABlock(Direction.Right))
             {
                 transform.position += new Vector3(1.0f, 0.0f, 0.0f);
             }
         }
         protected override void VerticalMove()
         {
-            if (Input.GetKeyDown(up) && !ThereIsABlock(Direction.Up))
+            if (Input.GetButtonDown(upButtonName) && !ThereIsABlock(Direction.Up))
             {
                 transform.position += new Vector3(0.0f, 0.0f, 1.0f);
             }
 
-            if (Input.GetKeyDown(down) && !ThereIsABlock(Direction.Down))
+            if (Input.GetButtonDown(downButtonName) && !ThereIsABlock(Direction.Down))
             {
                 transform.position += new Vector3(0.0f, 0.0f, -1.0f);
             }

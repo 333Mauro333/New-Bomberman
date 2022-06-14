@@ -5,6 +5,7 @@ namespace NewBomberman
     public class MapGenerator : MonoBehaviour
     {
         [SerializeField] GameObject player = null;
+        [SerializeField] GameObject enemy = null;
         [SerializeField] GameObject floor = null;
         [SerializeField] GameObject prefabUnbreakableBlock = null;
         [SerializeField] GameObject prefabBreakableBlock = null;
@@ -17,6 +18,7 @@ namespace NewBomberman
         const int mapSize = 10;
 
         const char plyr1 = 'P';
+        const char nEnmy = 'E';
         const char unBck = 'U';
         const char brBck = 'B';
         const char empty = ' ';
@@ -26,7 +28,7 @@ namespace NewBomberman
         void Awake()
         {
             blocksMap = new char[mapSize, mapSize] { { unBck, empty, empty, empty, empty, empty, empty, empty, empty, empty },
-                                                     { unBck, plyr1, empty, empty, empty, empty, empty, empty, empty, empty },
+                                                     { unBck, plyr1, empty, empty, empty, empty, empty, empty, nEnmy, empty },
                                                      { unBck, unBck, unBck, empty, empty, empty, empty, empty, empty, empty },
                                                      { unBck, unBck, unBck, unBck, empty, empty, empty, empty, empty, empty },
                                                      { brBck, brBck, brBck, brBck, brBck, empty, empty, empty, empty, empty },
@@ -53,14 +55,19 @@ namespace NewBomberman
             {
                 for (int j = 0; j < blocksTable.GetLength(1); j++)
                 {
-                    if (blocksMap[i, j] != plyr1)
+                    if (blocksMap[i, j] != plyr1 && blocksMap[i, j] != nEnmy)
                     {
                         blocksTable[i, j] = gB(blocksMap[i, j], topLeftX + wBlock * i, topLeftZ - dBlock * j);
                     }
-                    else
+                    else if (blocksMap[i, j] == plyr1)
                     {
                         float posOnTheFloorY = floor.transform.position.y + floor.transform.localScale.y / 2.0f + player.transform.localScale.y / 2.0f;
                         player.transform.position = new Vector3(topLeftX + wBlock * i, posOnTheFloorY, topLeftZ - dBlock * j);
+                    }
+                    else
+                    {
+                        float posOnTheFloorY = floor.transform.position.y + floor.transform.localScale.y / 2.0f + enemy.transform.localScale.y / 2.0f;
+                        enemy.transform.position = new Vector3(topLeftX + wBlock * i, posOnTheFloorY, topLeftZ - dBlock * j);
                     }
                 }
             }

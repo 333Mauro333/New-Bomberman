@@ -56,16 +56,17 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Interfaces\IDestroyable.cs" />
+    <Compile Include="Assets\Scripts\BreakableBlock.cs" />
     <Compile Include="Assets\Scripts\Enums\EnumDirection.cs" />
     <Compile Include="Assets\Scripts\Movement\LimitMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\CharacterMovement.cs" />
     <Compile Include="Assets\Scripts\BombGenerator.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IReachable.cs" />
     <Compile Include="Assets\Scripts\Movement\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Bomb.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IDestroyable.cs" />
-    <Compile Include="Assets\Scripts\BreakableBlock.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IReachable.cs" />
+    <Compile Include="Assets\Scripts\Movement\EnemyMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

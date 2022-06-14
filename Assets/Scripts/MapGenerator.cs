@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 namespace NewBomberman
 {
     public class MapGenerator : MonoBehaviour

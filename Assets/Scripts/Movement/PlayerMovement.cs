@@ -10,7 +10,13 @@ namespace NewBomberman
         [SerializeField] string leftButtonName = "";
         [SerializeField] string rightButtonName = "";
 
+        LimitMovement lM;
 
+
+        void Awake()
+        {
+            lM = GetComponent<LimitMovement>();
+        }
         void Update()
         {
             Movement();
@@ -24,62 +30,27 @@ namespace NewBomberman
         }
         protected override void HorizontalMove()
         {
-            if (Input.GetButtonDown(leftButtonName) && !ThereIsABlock(Direction.Left))
+            if (Input.GetButtonDown(leftButtonName) && !lM.ThereIsAnything(Direction.Left))
             {
                 transform.position += -Vector3.right;
             }
 
-            if (Input.GetButtonDown(rightButtonName) && !ThereIsABlock(Direction.Right))
+            if (Input.GetButtonDown(rightButtonName) && !lM.ThereIsAnything(Direction.Right))
             {
                 transform.position += new Vector3(1.0f, 0.0f, 0.0f);
             }
         }
         protected override void VerticalMove()
         {
-            if (Input.GetButtonDown(upButtonName) && !ThereIsABlock(Direction.Up))
+            if (Input.GetButtonDown(upButtonName) && !lM.ThereIsAnything(Direction.Up))
             {
                 transform.position += new Vector3(0.0f, 0.0f, 1.0f);
             }
 
-            if (Input.GetButtonDown(downButtonName) && !ThereIsABlock(Direction.Down))
+            if (Input.GetButtonDown(downButtonName) && !lM.ThereIsAnything(Direction.Down))
             {
                 transform.position += new Vector3(0.0f, 0.0f, -1.0f);
             }
-        }
-
-        bool ThereIsABlock(Direction d)
-        {
-            RaycastHit raycast;
-            Vector3 direction;
-
-            switch (d)
-            {
-                case Direction.Up:
-                    direction = transform.forward;
-                    break;
-
-                case Direction.Down:
-                    direction = -transform.forward;
-                    break;
-
-                case Direction.Left:
-                    direction = -transform.right;
-                    break;
-
-                case Direction.Right:
-                    direction = transform.right;
-                    break;
-
-                default:
-                    return false;
-            }
-
-            if (Physics.Raycast(transform.position, direction, out raycast, transform.localScale.x))
-            {
-                return raycast.collider.CompareTag("Unbreakable");
-            }
-
-            return false;
         }
     }
 }

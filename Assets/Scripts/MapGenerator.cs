@@ -30,14 +30,14 @@ namespace NewBomberman
         void Awake()
         {
             blocksMap = new char[mapSize, mapSize] { { brder, brder, brder, brder, brder, brder, brder, brder, brder, brder },
-                                                     { brder, plyr1, empty, empty, empty, empty, empty, empty, empty, brder },
-                                                     { brder, empty, unBck, unBck, empty, empty, unBck, unBck, empty, brder },
-                                                     { brder, empty, unBck, empty, empty, empty, empty, unBck, empty, brder },
-                                                     { brder, empty, empty, empty, empty, empty, empty, empty, empty, brder },
-                                                     { brder, empty, empty, empty, empty, nEnmy, empty, empty, empty, brder },
-                                                     { brder, empty, unBck, empty, empty, empty, empty, unBck, empty, brder },
-                                                     { brder, empty, unBck, unBck, empty, empty, unBck, unBck, empty, brder },
-                                                     { brder, empty, empty, empty, empty, empty, empty, empty, empty, brder },
+                                                     { brder, plyr1, empty, brBck, brBck, brBck, brBck, empty, empty, brder },
+                                                     { brder, empty, unBck, unBck, brBck, brBck, unBck, unBck, empty, brder },
+                                                     { brder, brBck, unBck, brBck, brBck, brBck, brBck, unBck, brBck, brder },
+                                                     { brder, brBck, empty, brBck, empty, empty, brBck, empty, brBck, brder },
+                                                     { brder, brBck, empty, brBck, empty, nEnmy, brBck, empty, brBck, brder },
+                                                     { brder, brBck, unBck, brBck, brBck, brBck, brBck, unBck, brBck, brder },
+                                                     { brder, empty, unBck, unBck, brBck, brBck, unBck, unBck, empty, brder },
+                                                     { brder, empty, empty, brBck, brBck, brBck, brBck, empty, empty, brder },
                                                      { brder, brder, brder, brder, brder, brder, brder, brder, brder, brder }};
         }
         void Start()
@@ -72,6 +72,7 @@ namespace NewBomberman
 
                         float posOnTheFloorY = prefabFloor.transform.position.y + prefabFloor.transform.localScale.y / 2.0f + newEnemy.transform.localScale.y / 2.0f;
                         newEnemy.transform.position = new Vector3(topLeftX + wBlock * i, posOnTheFloorY, topLeftZ - dBlock * j);
+                        newEnemy.GetComponent<EnemyMovement>().SetTimeToMove(0.5f);
                     }
                 }
             }
@@ -81,6 +82,7 @@ namespace NewBomberman
         GameObject gB(char blockType, float x, float z)
         {
             GameObject newBlock = null;
+
 
             float yOnTheFloor = 0.0f;
 

@@ -5,7 +5,7 @@ namespace NewBomberman
 {
     public class EnemyMovement : CharacterMovement
     {
-        float movementTimer;
+        float secondsToMove;
         float actualTime;
 
         LimitMovement lM;
@@ -13,8 +13,8 @@ namespace NewBomberman
 
         void Awake()
         {
-            movementTimer = 1.0f;
-            actualTime = movementTimer;
+            secondsToMove = 1.0f;
+            actualTime = secondsToMove;
 
             lM = GetComponent<LimitMovement>();
         }
@@ -24,6 +24,11 @@ namespace NewBomberman
         }
 
 
+        public void SetTimeToMove(float seconds)
+        {
+            secondsToMove = seconds;
+        }
+
         protected override void Movement()
         {
             if (actualTime <= 0.0f)
@@ -31,9 +36,9 @@ namespace NewBomberman
                 Direction randomDirection = (Direction)Random.Range(0, 4);
 
 
-                actualTime = movementTimer;
+                actualTime = secondsToMove;
 
-                if (!lM.ThereIsAnything(randomDirection))
+                if (!lM.ThereIsAnything(randomDirection) || lM.ThereIsAnything(randomDirection, "Player"))
                 {
                     switch (randomDirection)
                     {
@@ -60,7 +65,6 @@ namespace NewBomberman
                 actualTime = (actualTime - Time.deltaTime > 0.0f) ? actualTime - Time.deltaTime : 0.0f;
             }
         }
-
 
         protected override void MoveUp()
         {

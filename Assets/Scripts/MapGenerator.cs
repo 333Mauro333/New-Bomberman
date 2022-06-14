@@ -6,18 +6,19 @@ namespace NewBomberman
     public class MapGenerator : MonoBehaviour
     {
         [SerializeField] GameObject player = null;
-        [SerializeField] GameObject enemy = null;
-        [SerializeField] GameObject floor = null;
+        [SerializeField] GameObject prefabBorderBlock = null;
+        [SerializeField] GameObject prefabEnemy = null;
+        [SerializeField] GameObject prefabFloor = null;
         [SerializeField] GameObject prefabUnbreakableBlock = null;
         [SerializeField] GameObject prefabBreakableBlock = null;
 
-        [SerializeField] char[,] blocksMap;
 
-
+        char[,] blocksMap;
         GameObject[,] blocksTable;
 
         const int mapSize = 10;
 
+        const char brder = '+';
         const char plyr1 = 'P';
         const char nEnmy = 'E';
         const char unBck = 'U';
@@ -28,26 +29,26 @@ namespace NewBomberman
 
         void Awake()
         {
-            blocksMap = new char[mapSize, mapSize] { { unBck, empty, empty, empty, empty, empty, empty, empty, empty, empty },
-                                                     { unBck, plyr1, empty, empty, empty, empty, empty, empty, nEnmy, empty },
-                                                     { unBck, unBck, unBck, empty, empty, empty, empty, empty, empty, empty },
-                                                     { unBck, unBck, unBck, unBck, empty, empty, empty, empty, empty, empty },
-                                                     { brBck, brBck, brBck, brBck, brBck, empty, empty, empty, empty, empty },
-                                                     { unBck, unBck, unBck, unBck, unBck, unBck, empty, empty, empty, empty },
-                                                     { unBck, unBck, unBck, unBck, unBck, unBck, unBck, empty, empty, empty },
-                                                     { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, empty, empty },
-                                                     { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, empty },
-                                                     { unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck, unBck }};
+            blocksMap = new char[mapSize, mapSize] { { brder, brder, brder, brder, brder, brder, brder, brder, brder, brder },
+                                                     { brder, plyr1, empty, empty, empty, empty, empty, empty, empty, brder },
+                                                     { brder, empty, unBck, unBck, empty, empty, unBck, unBck, empty, brder },
+                                                     { brder, empty, unBck, empty, empty, empty, empty, unBck, empty, brder },
+                                                     { brder, empty, empty, empty, empty, empty, empty, empty, empty, brder },
+                                                     { brder, empty, empty, empty, empty, nEnmy, empty, empty, empty, brder },
+                                                     { brder, empty, unBck, empty, empty, empty, empty, unBck, empty, brder },
+                                                     { brder, empty, unBck, unBck, empty, empty, unBck, unBck, empty, brder },
+                                                     { brder, empty, empty, empty, empty, empty, empty, empty, empty, brder },
+                                                     { brder, brder, brder, brder, brder, brder, brder, brder, brder, brder }};
         }
         void Start()
         {
-            floor.transform.localScale = new Vector3(mapSize, 1.0f, mapSize);
-            floor.transform.position = new Vector3(0.0f, -floor.transform.localScale.y / 2.0f, 0.0f);
+            prefabFloor.transform.localScale = new Vector3(mapSize, 1.0f, mapSize);
+            prefabFloor.transform.position = new Vector3(0.0f, -prefabFloor.transform.localScale.y / 2.0f, 0.0f);
 
-            float wBlock = floor.transform.localScale.x / mapSize;
-            float dBlock = floor.transform.localScale.z / mapSize;
-            float topLeftX = floor.transform.position.x - floor.transform.localScale.x / 2.0f + wBlock / 2.0f;
-            float topLeftZ = floor.transform.position.z + floor.transform.localScale.z / 2.0f - dBlock / 2.0f;
+            float wBlock = prefabFloor.transform.localScale.x / mapSize;
+            float dBlock = prefabFloor.transform.localScale.z / mapSize;
+            float topLeftX = prefabFloor.transform.position.x - prefabFloor.transform.localScale.x / 2.0f + wBlock / 2.0f;
+            float topLeftZ = prefabFloor.transform.position.z + prefabFloor.transform.localScale.z / 2.0f - dBlock / 2.0f;
 
 
             blocksTable = new GameObject[mapSize, mapSize];
@@ -58,17 +59,19 @@ namespace NewBomberman
                 {
                     if (blocksMap[i, j] != plyr1 && blocksMap[i, j] != nEnmy)
                     {
-                        blocksTable[i, j] = gB(blocksMap[i, j], topLeftX + wBlock * i, topLeftZ - dBlock * j);
+                        blocksTable[i, j] = gB(blocksMap[i, j], topLeftX + wBlock * j, topLeftZ - dBlock * i);
                     }
                     else if (blocksMap[i, j] == plyr1)
                     {
-                        float posOnTheFloorY = floor.transform.position.y + floor.transform.localScale.y / 2.0f + player.transform.localScale.y / 2.0f;
-                        player.transform.position = new Vector3(topLeftX + wBlock * i, posOnTheFloorY, topLeftZ - dBlock * j);
+                        float posOnTheFloorY = prefabFloor.transform.position.y + prefabFloor.transform.localScale.y / 2.0f + player.transform.localScale.y / 2.0f;
+                        player.transform.position = new Vector3(topLeftX + wBlock * j, posOnTheFloorY, topLeftZ - dBlock * i);
                     }
                     else
                     {
-                        float posOnTheFloorY = floor.transform.position.y + floor.transform.localScale.y / 2.0f + enemy.transform.localScale.y / 2.0f;
-                        enemy.transform.position = new Vector3(topLeftX + wBlock * i, posOnTheFloorY, topLeftZ - dBlock * j);
+                        GameObject newEnemy = Instantiate(prefabEnemy);
+
+                        float posOnTheFloorY = prefabFloor.transform.position.y + prefabFloor.transform.localScale.y / 2.0f + newEnemy.transform.localScale.y / 2.0f;
+                        newEnemy.transform.position = new Vector3(topLeftX + wBlock * i, posOnTheFloorY, topLeftZ - dBlock * j);
                     }
                 }
             }
@@ -77,30 +80,33 @@ namespace NewBomberman
 
         GameObject gB(char blockType, float x, float z)
         {
-            GameObject block = null;
+            GameObject newBlock = null;
 
             float yOnTheFloor = 0.0f;
 
-
             if (blockType == unBck)
             {
-                block = Instantiate(prefabUnbreakableBlock);
+                newBlock = Instantiate(prefabUnbreakableBlock);
             }
             else if (blockType == brBck)
             {
-                block = Instantiate(prefabBreakableBlock);
+                newBlock = Instantiate(prefabBreakableBlock);
             }
-
-            if (block != null)
+            else if (blockType == brder)
             {
-                block.transform.localScale = new Vector3(floor.transform.localScale.x / mapSize, floor.transform.localScale.y, floor.transform.localScale.z / mapSize);
+                newBlock = Instantiate(prefabBorderBlock);
+            }
 
-                yOnTheFloor = floor.transform.position.y + floor.transform.localScale.y / 2.0f + block.transform.localScale.y / 2.0f;
-                block.transform.position = new Vector3(x, yOnTheFloor, z);
+            if (newBlock != null)
+            {
+                newBlock.transform.localScale = new Vector3(prefabFloor.transform.localScale.x / mapSize, prefabFloor.transform.localScale.y, prefabFloor.transform.localScale.z / mapSize);
+
+                yOnTheFloor = prefabFloor.transform.position.y + prefabFloor.transform.localScale.y / 2.0f + newBlock.transform.localScale.y / 2.0f;
+                newBlock.transform.position = new Vector3(x, yOnTheFloor, z);
             }
 
 
-            return block;
+            return newBlock;
         }
     }
 }

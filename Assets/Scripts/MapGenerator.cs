@@ -1,77 +1,92 @@
 using UnityEngine;
 
+using System.IO;
+using System.Collections.Generic;
+
 
 namespace NewBomberman
 {
     public class MapGenerator : MonoBehaviour
     {
-        [SerializeField] GameObject player = null;
+        [Header("References")]
+        [SerializeField] GameObject playerReference = null;
         [SerializeField] GameObject prefabBorderBlock = null;
         [SerializeField] GameObject prefabEnemy = null;
-        [SerializeField] GameObject prefabFloor = null;
+        [SerializeField] GameObject prefabTile = null;
         [SerializeField] GameObject prefabUnbreakableBlock = null;
         [SerializeField] GameObject prefabBreakableBlock = null;
 
-        char[,] blocksMap;
-        GameObject[,] blocksTable;
+        FileStream fileStreamOpen;
+        StreamReader streamReader;
+
+        GameObject[,] tileMap;
+
+        List<string> stringMap;
 
         const int mapSize = 10;
 
-        const char brder = '+';
-        const char plyr1 = 'P';
-        const char nEnmy = 'E';
-        const char unBck = 'U';
-        const char brBck = 'B';
-        const char empty = ' ';
+        const char border = 'X';
+        const char player = 'P';
+        const char enemy = 'E';
+        const char unbreakableBlock = 'U';
+        const char breakableBlock = '-';
+        const char space = ' ';
+        const char door = 'D';
+        const char key = 'K';
 
 
 
         void Awake()
         {
-            blocksMap = new char[mapSize, mapSize] { { brder, brder, brder, brder, brder, brder, brder, brder, brder, brder },
-                                                     { brder, plyr1, empty, brBck, brBck, brBck, brBck, empty, empty, brder },
-                                                     { brder, empty, unBck, unBck, brBck, brBck, unBck, unBck, empty, brder },
-                                                     { brder, brBck, unBck, brBck, brBck, brBck, brBck, unBck, brBck, brder },
-                                                     { brder, brBck, empty, brBck, empty, empty, brBck, empty, brBck, brder },
-                                                     { brder, brBck, empty, brBck, empty, nEnmy, brBck, empty, brBck, brder },
-                                                     { brder, brBck, unBck, brBck, brBck, brBck, brBck, unBck, brBck, brder },
-                                                     { brder, empty, unBck, unBck, brBck, brBck, unBck, unBck, empty, brder },
-                                                     { brder, empty, empty, brBck, brBck, brBck, brBck, empty, empty, brder },
-                                                     { brder, brder, brder, brder, brder, brder, brder, brder, brder, brder }};
+            fileStreamOpen = File.OpenRead("Assets/Text Map/Level Map.txt");
+            streamReader = new StreamReader(fileStreamOpen);
+
+            stringMap = new List<string>();
+
+            while (!streamReader.EndOfStream)
+            {
+                stringMap.Add(streamReader.ReadLine());
+            }
+
+            tileMap = new GameObject[stringMap.Count, stringMap[0].Length];
+
+            Debug.Log("Detenerse");
         }
 
         void Start()
         {
-            prefabFloor.transform.localScale = new Vector3(mapSize, 1.0f, mapSize);
-            prefabFloor.transform.position = new Vector3(0.0f, -prefabFloor.transform.localScale.y / 2.0f, 0.0f);
-
-            float wBlock = prefabFloor.transform.localScale.x / mapSize;
-            float dBlock = prefabFloor.transform.localScale.z / mapSize;
-            float topLeftX = prefabFloor.transform.position.x - prefabFloor.transform.localScale.x / 2.0f + wBlock / 2.0f;
-            float topLeftZ = prefabFloor.transform.position.z + prefabFloor.transform.localScale.z / 2.0f - dBlock / 2.0f;
+            float wBlock = prefabTile.transform.localScale.x;
+            float dBlock = prefabTile.transform.localScale.z;
+            float tileCenterX = prefabTile.transform.localScale.x / 2.0f;
+            float tileCenterZ = prefabTile.transform.localScale.z / 2.0f;
 
 
-            blocksTable = new GameObject[mapSize, mapSize];
-
-            for (int i = 0; i < blocksTable.GetLength(0); i++)
+            for (int i = 0; i < stringMap.Count; i++)
             {
-                for (int j = 0; j < blocksTable.GetLength(1); j++)
+                for (int j = 0; j < stringMap[i].Length; j++)
                 {
-                    if (blocksMap[i, j] != plyr1 && blocksMap[i, j] != nEnmy)
+                    tileMap[i, j] = Instantiate(prefabTile);
+                    tileMap[i, j].transform.position = new Vector3(j, -transform.localScale.y / 2.0f, i);
+                }
+            }
+
+            for (int i = 0; i < stringMap.Count; i++)
+            {
+                for (int j = 0; j < stringMap[i].Length; j++)
+                {
+                    if (IsABlock(stringMap[i][j]))
                     {
-                        blocksTable[i, j] = gB(blocksMap[i, j], topLeftX + wBlock * j, topLeftZ - dBlock * i);
+                        gB(stringMap[i][j], tileMap[i, j].transform.position.x + j, tileMap[i, j].transform.position.z - i);
                     }
-                    else if (blocksMap[i, j] == plyr1)
+                    else if (stringMap[i][j] == player)
                     {
-                        float posOnTheFloorY = prefabFloor.transform.position.y + prefabFloor.transform.localScale.y / 2.0f + player.transform.localScale.y / 2.0f;
-                        player.transform.position = new Vector3(topLeftX + wBlock * j, posOnTheFloorY, topLeftZ - dBlock * i);
+                        playerReference.transform.position = new Vector3(tileMap[i, j].transform.position.x + j, 0.0f, tileMap[i, j].transform.position.z - i);
                     }
-                    else
+                    else if (stringMap[i][j] == enemy)
                     {
                         GameObject newEnemy = Instantiate(prefabEnemy);
 
-                        float posOnTheFloorY = prefabFloor.transform.position.y + prefabFloor.transform.localScale.y / 2.0f + newEnemy.transform.localScale.y / 2.0f;
-                        newEnemy.transform.position = new Vector3(topLeftX + wBlock * i, posOnTheFloorY, topLeftZ - dBlock * j);
+                        newEnemy.transform.position = new Vector3(tileMap[i, j].transform.position.x + j, 0.0f, tileMap[i, j].transform.position.z - i);
                         newEnemy.GetComponent<EnemyMovement>().SetTimeToMove(0.5f);
                     }
                 }
@@ -84,31 +99,31 @@ namespace NewBomberman
             GameObject newBlock = null;
 
 
-            float yOnTheFloor = 0.0f;
-
-            if (blockType == unBck)
+            if (blockType == unbreakableBlock)
             {
                 newBlock = Instantiate(prefabUnbreakableBlock);
             }
-            else if (blockType == brBck)
+            else if (blockType == breakableBlock)
             {
                 newBlock = Instantiate(prefabBreakableBlock);
             }
-            else if (blockType == brder)
+            else if (blockType == border)
             {
                 newBlock = Instantiate(prefabBorderBlock);
             }
 
             if (newBlock != null)
             {
-                newBlock.transform.localScale = new Vector3(prefabFloor.transform.localScale.x / mapSize, prefabFloor.transform.localScale.y, prefabFloor.transform.localScale.z / mapSize);
-
-                yOnTheFloor = prefabFloor.transform.position.y + prefabFloor.transform.localScale.y / 2.0f + newBlock.transform.localScale.y / 2.0f;
-                newBlock.transform.position = new Vector3(x, yOnTheFloor, z);
+                newBlock.transform.position = new Vector3(x, 0.0f, z);
             }
 
 
             return newBlock;
+        }
+
+        bool IsABlock(char character)
+        {
+            return character == border || character == unbreakableBlock || character == breakableBlock;
         }
     }
 }

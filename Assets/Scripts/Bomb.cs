@@ -85,7 +85,7 @@ namespace NewBomberman
 
                 if (iD != null)
                 {
-                    iD.Destroy();
+                    iD.DestroyItSelf();
                 }
             }
         }

@@ -18,6 +18,7 @@ namespace NewBomberman
 
             lM = GetComponent<LimitMovement>();
         }
+
         void Update()
         {
             Movement();

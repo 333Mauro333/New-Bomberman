@@ -3,11 +3,24 @@ using UnityEngine;
 
 namespace NewBomberman
 {
-    public class BreakableBlock : MonoBehaviour, IDestroyable
+    public class Enemy : MonoBehaviour, IDestroyable
     {
+
+
+
+        void Start()
+        {
+
+        }
+
+        void Update()
+        {
+
+        }
+
+
         public void DestroyItSelf()
         {
-            Debug.Log("Bloque destruible detecto que debe romperse.");
             Destroy(gameObject);
         }
     }

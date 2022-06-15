@@ -3,6 +3,6 @@ namespace NewBomberman
 {
     interface IDestroyable
     {
-        void Destroy();
+        void DestroyItSelf();
     }
 }

@@ -61,7 +61,7 @@
     <Compile Include="Assets\Scripts\Enums\EnumDirection.cs" />
     <Compile Include="Assets\Scripts\Movement\LimitMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\CharacterMovement.cs" />
-    <Compile Include="Assets\Scripts\BombGenerator.cs" />
+    <Compile Include="Assets\Scripts\BombPlanter.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IReachable.cs" />
     <Compile Include="Assets\Scripts\Movement\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\EnemyMovement.cs" />

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NewBomberman
 {
-    public class Bomb : MonoBehaviour, IReachable
+    public class Bomb : MonoBehaviour, IReachable, IDestroyable
     {
         [SerializeField] float timeToExplode = 0.0f;
         [SerializeField] float range = 1.0f;
@@ -11,6 +11,7 @@ namespace NewBomberman
         LineRenderer lR;
         float actualTime;
 
+        bool explodedByAnotherBomb;
         
 
         void Awake()
@@ -21,6 +22,8 @@ namespace NewBomberman
             lR.endWidth = 0.01f;
 
             actualTime = timeToExplode;
+
+            explodedByAnotherBomb = false;
         }
 
         void Start()
@@ -49,9 +52,7 @@ namespace NewBomberman
 
             if (actualTime <= 0.0f)
             {
-                ReachRange();
-                ResetValues();
-                gameObject.SetActive(false);
+                Explode();
             }
         }
         void SearchObjective(Direction direction)
@@ -83,6 +84,7 @@ namespace NewBomberman
             {
                 IDestroyable iD = ray.transform.gameObject.GetComponent<IDestroyable>();
 
+
                 if (iD != null)
                 {
                     iD.DestroyItSelf();
@@ -92,6 +94,23 @@ namespace NewBomberman
         void ResetValues()
         {
             actualTime = timeToExplode;
+            explodedByAnotherBomb = false;
+        }
+
+        void Explode()
+        {
+            ReachRange();
+            ResetValues();
+            gameObject.SetActive(false);
+        }
+
+        public void DestroyItSelf()
+        {
+            if (!explodedByAnotherBomb)
+            {
+                explodedByAnotherBomb = true;
+                Explode();
+            }
         }
     }
 }

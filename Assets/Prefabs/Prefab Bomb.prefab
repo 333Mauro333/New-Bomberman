@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6903223800769004032}
   - component: {fileID: -4374469396505115357}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: Prefab Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToExplode: 3
+  range: 1
 --- !u!120 &-4374469396505115357
 LineRenderer:
   m_ObjectHideFlags: 0

@@ -12,7 +12,6 @@ namespace NewBomberman
         [SerializeField] GameObject prefabUnbreakableBlock = null;
         [SerializeField] GameObject prefabBreakableBlock = null;
 
-
         char[,] blocksMap;
         GameObject[,] blocksTable;
 
@@ -40,6 +39,7 @@ namespace NewBomberman
                                                      { brder, empty, empty, brBck, brBck, brBck, brBck, empty, empty, brder },
                                                      { brder, brder, brder, brder, brder, brder, brder, brder, brder, brder }};
         }
+
         void Start()
         {
             prefabFloor.transform.localScale = new Vector3(mapSize, 1.0f, mapSize);

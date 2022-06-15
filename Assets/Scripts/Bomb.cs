@@ -6,16 +6,21 @@ namespace NewBomberman
     public class Bomb : MonoBehaviour, IReachable
     {
         [SerializeField] float timeToExplode = 0.0f;
-        [SerializeField] float range = 3.0f;
+        [SerializeField] float range = 1.0f;
 
         LineRenderer lR;
+        float actualTime;
 
         
 
         void Awake()
         {
             lR = GetComponent<LineRenderer>();
-            lR.SetWidth(0.01f, 0.01f);
+
+            lR.startWidth = 0.01f;
+            lR.endWidth = 0.01f;
+
+            actualTime = timeToExplode;
         }
 
         void Start()
@@ -29,17 +34,6 @@ namespace NewBomberman
             SubtractTime();
         }
 
-        void SubtractTime()
-        {
-            timeToExplode = (timeToExplode - Time.deltaTime <= 0.0f) ? 0.0f : timeToExplode - Time.deltaTime;
-
-            if (timeToExplode <= 0.0f)
-            {
-                ReachRange();
-                Destroy(gameObject);
-            }
-        }
-
 
         public void ReachRange()
         {
@@ -49,6 +43,17 @@ namespace NewBomberman
             SearchObjective(Direction.Right);
         }
 
+        void SubtractTime()
+        {
+            actualTime = (actualTime - Time.deltaTime <= 0.0f) ? 0.0f : actualTime - Time.deltaTime;
+
+            if (actualTime <= 0.0f)
+            {
+                ReachRange();
+                ResetValues();
+                gameObject.SetActive(false);
+            }
+        }
         void SearchObjective(Direction direction)
         {
             Vector3 vectorD = Vector3.zero;
@@ -76,13 +81,17 @@ namespace NewBomberman
 
             if (Physics.Raycast(transform.position, vectorD, out ray, range))
             {
-                IDestroyable id = ray.transform.gameObject.GetComponent<IDestroyable>();
+                IDestroyable iD = ray.transform.gameObject.GetComponent<IDestroyable>();
 
-                if (id != null)
+                if (iD != null)
                 {
-                    id.Destroy();
+                    iD.Destroy();
                 }
             }
+        }
+        void ResetValues()
+        {
+            actualTime = timeToExplode;
         }
     }
 }

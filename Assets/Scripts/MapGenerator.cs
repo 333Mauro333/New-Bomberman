@@ -10,27 +10,29 @@ namespace NewBomberman
     {
         [Header("References")]
         [SerializeField] GameObject playerReference = null;
+        [SerializeField] GameObject keyReference = null;
+        [SerializeField] GameObject doorReference = null;
+
+        [Header("Prefabs")]
         [SerializeField] GameObject prefabBorderBlock = null;
         [SerializeField] GameObject prefabEnemy = null;
         [SerializeField] GameObject prefabTile = null;
         [SerializeField] GameObject prefabUnbreakableBlock = null;
         [SerializeField] GameObject prefabBreakableBlock = null;
 
+
         FileStream fileStreamOpen;
         StreamReader streamReader;
 
-        GameObject[,] tileMap;
-
         List<string> stringMap;
 
-        const int mapSize = 10;
+        GameObject[,] tileMap;
 
         const char border = 'X';
         const char player = 'P';
         const char enemy = 'E';
         const char unbreakableBlock = 'U';
         const char breakableBlock = '-';
-        const char space = ' ';
         const char door = 'D';
         const char key = 'K';
 
@@ -41,53 +43,76 @@ namespace NewBomberman
             fileStreamOpen = File.OpenRead("Assets/Text Map/Level Map.txt");
             streamReader = new StreamReader(fileStreamOpen);
 
-            stringMap = new List<string>();
+            stringMap = new List<string>(); // inicializo la lista de strings.
 
+            // Leo el archivo cargado.
             while (!streamReader.EndOfStream)
             {
                 stringMap.Add(streamReader.ReadLine());
             }
 
-            tileMap = new GameObject[stringMap.Count, stringMap[0].Length];
+            tileMap = new GameObject[stringMap.Count, stringMap[0].Length]; // Inicializo el arreglo bidimensional de objetos.
 
-            Debug.Log("Detenerse");
+            // Cierro los archivos de lectura.
+            fileStreamOpen.Close();
+            streamReader.Close();
         }
 
         void Start()
         {
-            float wBlock = prefabTile.transform.localScale.x;
-            float dBlock = prefabTile.transform.localScale.z;
-            float tileCenterX = prefabTile.transform.localScale.x / 2.0f;
-            float tileCenterZ = prefabTile.transform.localScale.z / 2.0f;
+            float onTheFloor = 0.0f;
 
 
+            // Se generan los bloques que conforman el piso.
             for (int i = 0; i < stringMap.Count; i++)
             {
                 for (int j = 0; j < stringMap[i].Length; j++)
                 {
                     tileMap[i, j] = Instantiate(prefabTile);
-                    tileMap[i, j].transform.position = new Vector3(j, -transform.localScale.y / 2.0f, i);
+                    tileMap[i, j].transform.position = new Vector3(j, -transform.localScale.y / 2.0f, -i);
                 }
             }
 
+            // Ubico el resto de los elementos sobre el mapa.
             for (int i = 0; i < stringMap.Count; i++)
             {
                 for (int j = 0; j < stringMap[i].Length; j++)
                 {
                     if (IsABlock(stringMap[i][j]))
                     {
-                        gB(stringMap[i][j], tileMap[i, j].transform.position.x + j, tileMap[i, j].transform.position.z - i);
+                        gB(stringMap[i][j], tileMap[i, j].transform.position.x, tileMap[i, j].transform.position.z);
                     }
-                    else if (stringMap[i][j] == player)
+                    else
                     {
-                        playerReference.transform.position = new Vector3(tileMap[i, j].transform.position.x + j, 0.0f, tileMap[i, j].transform.position.z - i);
-                    }
-                    else if (stringMap[i][j] == enemy)
-                    {
-                        GameObject newEnemy = Instantiate(prefabEnemy);
+                        switch (stringMap[i][j])
+                        {
+                            case player:
+                                // Posiciono al jugador en su respectiva posición.
+                                onTheFloor = playerReference.transform.localScale.y / 2.0f;
+                                playerReference.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
+                                break;
 
-                        newEnemy.transform.position = new Vector3(tileMap[i, j].transform.position.x + j, 0.0f, tileMap[i, j].transform.position.z - i);
-                        newEnemy.GetComponent<EnemyMovement>().SetTimeToMove(0.5f);
+                            case key:
+                                // Posiciono a la llave.
+                                onTheFloor = keyReference.transform.localScale.y / 2.0f;
+                                keyReference.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
+                                break;
+
+                            case door:
+                                // Posiciono la puerta.
+                                onTheFloor = doorReference.transform.localScale.y / 2.0f;
+                                doorReference.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
+                                break;
+
+                            case enemy:
+                                // Instancio un enemigo y lo ubico en el mapa.
+                                GameObject newEnemy = Instantiate(prefabEnemy);
+
+                                onTheFloor = newEnemy.transform.localScale.y / 2.0f;
+                                newEnemy.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
+                                newEnemy.GetComponent<EnemyMovement>().SetTimeToMove(0.5f);
+                                break;
+                        }
                     }
                 }
             }
@@ -114,7 +139,7 @@ namespace NewBomberman
 
             if (newBlock != null)
             {
-                newBlock.transform.position = new Vector3(x, 0.0f, z);
+                newBlock.transform.position = new Vector3(x, newBlock.transform.localScale.y / 2.0f, z);
             }
 
 

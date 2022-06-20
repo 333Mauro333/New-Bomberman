@@ -1,10 +1,14 @@
 XXXXXXXXXXXXXXXXXXXXXXXXX
-XP  ---  -----    UE--UKX
-X UU--U--U--UUU-U U-U-UEX
-X-U--- -- --- U U---U-U-X
-X- ---UE U--U U UUU U---X
-X- ---U  U--U-U-UE--  U X
-X-U--- -- ------UE--    X
-XUUU--U--U--UUUUUU--U-U X
-XD ----  ----  --UU----EX
+XP   -    --      UE--UKX
+X   --    --            X
+X UU--U  U--UUU-U U-U-UEX
+X-U---     -- U U---U-U-X
+X- - -UE U  U U UUU U---X
+X  - -U  U- U-U-UE--  U X
+X-U--- -- -   --UE--    X
+XUUU--U--U- UUUUUU--U-U X
+D U----  ----  --UU----EX
+X U UUUUUUUUUUUUUU     UX
+X    E           E     UX
+X          E           UX
 XXXXXXXXXXXXXXXXXXXXXXXXX

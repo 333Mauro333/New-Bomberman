@@ -10,13 +10,13 @@ namespace NewBomberman
         [SerializeField] string leftButtonName = "";
         [SerializeField] string rightButtonName = "";
 
-        LimitMovement lM;
+        LimitMovement lm;
 
 
 
         void Awake()
         {
-            lM = GetComponent<LimitMovement>();
+            lm = GetComponent<LimitMovement>();
         }
 
         void Update()
@@ -25,24 +25,25 @@ namespace NewBomberman
         }
 
 
+
         protected override void Movement()
         {
-            if (Input.GetButtonDown(upButtonName) && !lM.ThereIsAnything(Direction.Up))
+            if (Input.GetButtonDown(upButtonName) && (!lm.ThereIsAnything(Direction.Up) || lm.ThereIsAnything(Direction.Up, "Key")))
             {
                 MoveUp();
             }
 
-            if (Input.GetButtonDown(downButtonName) && !lM.ThereIsAnything(Direction.Down))
+            if (Input.GetButtonDown(downButtonName) && (!lm.ThereIsAnything(Direction.Down) || lm.ThereIsAnything(Direction.Down, "Key")))
             {
                 MoveDown();
             }
 
-            if (Input.GetButtonDown(leftButtonName) && !lM.ThereIsAnything(Direction.Left))
+            if (Input.GetButtonDown(leftButtonName) && (!lm.ThereIsAnything(Direction.Left) || lm.ThereIsAnything(Direction.Left, "Key")))
             {
                 MoveLeft();
             }
 
-            if (Input.GetButtonDown(rightButtonName) && !lM.ThereIsAnything(Direction.Right))
+            if (Input.GetButtonDown(rightButtonName) && (!lm.ThereIsAnything(Direction.Right) || lm.ThereIsAnything(Direction.Right, "Key")))
             {
                 MoveRight();
             }

@@ -5,9 +5,13 @@ namespace NewBomberman
 {
     public class BreakableBlock : MonoBehaviour, IDestroyable
     {
+        const int blockValue = 10;
+
+
+
         public void DestroyItSelf()
         {
-            Debug.Log("Bloque destruible detecto que debe romperse.");
+            FindObjectOfType<Player>().AddPoints(blockValue);
             Destroy(gameObject);
         }
     }

@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 1843866451014791648}
   - component: {fileID: 675886562129980877}
   m_Layer: 0
-  m_Name: Scene Manager
+  m_Name: Prefab Scene Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1843866451014791648
 Transform:
@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5bf6bab7e451b542acc59241bbc825f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}

@@ -7,6 +7,7 @@ namespace NewBomberman
     {
         [Header("References")]
         [SerializeField] Player p = null;
+        [SerializeField] Door d = null;
         [SerializeField] DoorTextController dtc = null;
 
 
@@ -14,6 +15,7 @@ namespace NewBomberman
         void Start()
         {
             p.doorStateChangeEvent += dtc.UpdateDoorState;
+            p.doorStateChangeEvent += d.UpdateBoxColliderState;
         }
     }
 }

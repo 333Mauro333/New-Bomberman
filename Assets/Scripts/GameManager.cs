@@ -4,11 +4,15 @@ using UnityEngine.SceneManagement;
 
 namespace NewBomberman
 {
-    class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
         public GameManager instance;
 
         public bool forLeftHanded = false;
+
+        public bool win = false;
+        public int score = 0;
+
 
 
         void Awake()
@@ -24,10 +28,13 @@ namespace NewBomberman
             }
         }
 
+
+
         public void LoadScene(string sceneName)
         {
             SceneManager.LoadScene(sceneName);
         }
+
         public void QuitGame()
         {
             #if UNITY_EDITOR
@@ -39,6 +46,14 @@ namespace NewBomberman
             Application.Quit();
 
             #endif
+        }
+
+
+
+        public void SetFinalGame(int score, bool win)
+        {
+            this.score = score;
+            this.win = win;
         }
 
         void Initialize()

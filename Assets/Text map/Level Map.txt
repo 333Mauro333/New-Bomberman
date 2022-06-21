@@ -10,5 +10,5 @@ XUUU--U--U- UUUUUU--U-U X
 D U----  ----  --UU----EX
 X U UUUUUUUUUUUUUU     UX
 X    E           E     UX
-X          E           UX
+X                      UX
 XXXXXXXXXXXXXXXXXXXXXXXXX

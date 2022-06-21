@@ -8,6 +8,7 @@ namespace NewBomberman
         [SerializeField] Player p = null;
 
 
+
         public void DestroyAndOpenDoor()
         {
             p.ChangeDoorState(true);

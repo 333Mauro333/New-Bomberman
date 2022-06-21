@@ -14,6 +14,7 @@ namespace NewBomberman
         bool explodedByAnotherBomb;
         
 
+
         void Awake()
         {
             lR = GetComponent<LineRenderer>();
@@ -38,12 +39,21 @@ namespace NewBomberman
         }
 
 
+
         public void ReachRange()
         {
             SearchObjective(Direction.Up);
             SearchObjective(Direction.Down);
             SearchObjective(Direction.Left);
             SearchObjective(Direction.Right);
+        }
+        public void DestroyItSelf()
+        {
+            if (!explodedByAnotherBomb)
+            {
+                explodedByAnotherBomb = true;
+                Explode();
+            }
         }
 
         void SubtractTime()
@@ -104,13 +114,5 @@ namespace NewBomberman
             gameObject.SetActive(false);
         }
 
-        public void DestroyItSelf()
-        {
-            if (!explodedByAnotherBomb)
-            {
-                explodedByAnotherBomb = true;
-                Explode();
-            }
-        }
     }
 }

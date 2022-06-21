@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Delegates\DoorStateHandler.cs" />
     <Compile Include="Assets\Scripts\Suscribers\DoorStateSuscriberManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay Elements\Key.cs" />
+    <Compile Include="Assets\Scripts\Text Controllers\FinalText.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

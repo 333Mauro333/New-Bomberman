@@ -8,11 +8,12 @@ namespace NewBomberman
     {
         public GameManager instance;
 
+        public bool forLeftHanded = false;
 
 
         void Awake()
         {
-            //Initialize();
+            Initialize();
         }
 
         void Update()
@@ -42,7 +43,7 @@ namespace NewBomberman
 
         void Initialize()
         {
-            // Si no hay una instancia del SceneController...
+            // Si no hay una instancia del GameManager...
             if (instance == null)
             {
                 // Este controlador se convierte en la escena.

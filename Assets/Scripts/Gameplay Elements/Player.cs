@@ -26,7 +26,6 @@ namespace NewBomberman
         {
             // Usé esta forma porque con el "OnCollisionEnter" no me funcionaba y no tuve suficiente tiempo para tratar de verificar bien a qué se debía
             // esto.
-
             if (key != null && transform.position.x == key.gameObject.transform.position.x && transform.position.z == key.gameObject.transform.position.z)
             {
                 key.DestroyAndOpenDoor();

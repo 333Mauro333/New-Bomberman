@@ -13,6 +13,7 @@ namespace NewBomberman
         LimitMovement lM;
 
 
+
         void Awake()
         {
             lM = GetComponent<LimitMovement>();

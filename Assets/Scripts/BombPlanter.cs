@@ -50,7 +50,7 @@ namespace NewBomberman
                 if (!bombs[i].gameObject.activeSelf && !ThereIsABomb(bombs[i]))
                 {
                     bombs[i].gameObject.SetActive(true);
-                    bombs[i].transform.position = new Vector3(transform.position.x, transform.position.y - transform.localScale.y / 2.0f + bombs[i].transform.localScale.y / 2.0f, transform.position.z);
+                    bombs[i].transform.position = new Vector3(transform.position.x, transform.position.y - transform.localScale.y / 2.0f + bombs[i].transform.localScale.y * 100 / 2.0f, transform.position.z);
 
                     break;
                 }

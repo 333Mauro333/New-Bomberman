@@ -108,7 +108,7 @@ namespace NewBomberman
                                 // Instancio un enemigo y lo ubico en el mapa.
                                 GameObject newEnemy = Instantiate(prefabEnemy);
 
-                                onTheFloor = newEnemy.transform.localScale.y / 2.0f;
+                                onTheFloor = newEnemy.transform.lossyScale.y * 100;
                                 newEnemy.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
                                 newEnemy.GetComponent<EnemyMovement>().SetTimeToMove(0.5f);
                                 break;

@@ -70,20 +70,21 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay Elements\Bomb.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
-    <Compile Include="Assets\Scripts\Text Controllers\PointsTextController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\PointsTextController.cs" />
     <Compile Include="Assets\Scripts\Delegates\ScoreChangeHandler.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IObserverPoints.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IPointsSubject.cs" />
     <Compile Include="Assets\Scripts\Suscribers\PointsSuscriberManager.cs" />
-    <Compile Include="Assets\Scripts\Text Controllers\DoorTextController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\DoorTextController.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IDoorStateSubject.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IObserverDoorState.cs" />
     <Compile Include="Assets\Scripts\Delegates\DoorStateHandler.cs" />
     <Compile Include="Assets\Scripts\Suscribers\DoorStateSuscriberManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay Elements\Key.cs" />
-    <Compile Include="Assets\Scripts\Text Controllers\FinalText.cs" />
+    <Compile Include="Assets\Scripts\Controllers\FinalText.cs" />
     <Compile Include="Assets\Scripts\GameManagerReferenceSearcher.cs" />
     <Compile Include="Assets\Scripts\Gameplay Elements\Door.cs" />
+    <Compile Include="Assets\Scripts\Controllers\ToggleController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

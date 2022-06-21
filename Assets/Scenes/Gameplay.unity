@@ -459,7 +459,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &780879132
 MonoBehaviour:
@@ -1245,7 +1245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298d2ddbc9a53ad4798edd51ae20cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: {fileID: 1807423817}
+  key: {fileID: 0}
   door: {fileID: 1944873893}
 --- !u!1 &1443613512
 GameObject:
@@ -1547,7 +1547,6 @@ GameObject:
   - component: {fileID: 1807423815}
   - component: {fileID: 1807423814}
   - component: {fileID: 1807423813}
-  - component: {fileID: 1807423817}
   m_Layer: 0
   m_Name: Key
   m_TagString: Key
@@ -1632,19 +1631,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1807423817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807423812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 788999e10c3979547b04c4aef42b99b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p: {fileID: 1316869773}
 --- !u!1 &1944873893
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ namespace NewBomberman
         }
 
 
+
         public void DestroyItSelf()
         {
             Destroy(gameObject);

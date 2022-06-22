@@ -113,6 +113,5 @@ namespace NewBomberman
             ResetValues();
             gameObject.SetActive(false);
         }
-
     }
 }

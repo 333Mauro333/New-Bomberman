@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6664358993437552698, guid: 1f8ae5a47df596f419fdc9c9b0e3216c, type: 3}
+  - {fileID: 2100000, guid: 9ebc70d290cba6946ad5a605ce9a69c6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,7 +140,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6664358993437552698, guid: 1f8ae5a47df596f419fdc9c9b0e3216c, type: 3}
+  - {fileID: 2100000, guid: 10c932a3cb586f94cb22d3d3a953c4c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 6953372597100732356}
   - component: {fileID: 6424554913975338634}
   - component: {fileID: 6779643576761363154}
+  - component: {fileID: 7738723762985301668}
   m_Layer: 0
   m_Name: Prefab Enemy
   m_TagString: Untagged
@@ -234,3 +235,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p: {fileID: 0}
+--- !u!65 &7738723762985301668
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5022615326822323116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 100, z: 100}
+  m_Center: {x: 0, y: 0, z: 0}

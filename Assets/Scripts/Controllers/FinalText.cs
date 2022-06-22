@@ -12,6 +12,7 @@ namespace NewBomberman
         GameManager gm;
 
 
+
         void Start()
         {
             gm = FindObjectOfType<GameManager>();

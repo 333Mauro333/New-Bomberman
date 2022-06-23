@@ -6,6 +6,7 @@ namespace NewBomberman
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
+        [Header("Configuration")]
         [SerializeField] string upButtonName = "";
         [SerializeField] string downButtonName = "";
         [SerializeField] string leftButtonName = "";
@@ -55,19 +56,19 @@ namespace NewBomberman
 
         void MoveForward()
         {
-            cc.SimpleMove(transform.forward * forwardSpeed * Time.deltaTime);
+            cc.Move(transform.forward * forwardSpeed * Time.deltaTime);
         }
         void MoveBackward()
         {
-            cc.SimpleMove(-transform.forward * (forwardSpeed / 2.0f) * Time.deltaTime);
+            cc.Move(-transform.forward * (forwardSpeed / 2.0f) * Time.deltaTime);
         }
         void MoveLeft()
         {
-            cc.SimpleMove(-transform.right * lateralSpeed * Time.deltaTime);
+            cc.Move(-transform.right * lateralSpeed * Time.deltaTime);
         }
         void MoveRight()
         {
-            cc.SimpleMove(transform.right * lateralSpeed * Time.deltaTime);
+            cc.Move(transform.right * lateralSpeed * Time.deltaTime);
         }
     }
 }

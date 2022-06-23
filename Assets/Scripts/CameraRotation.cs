@@ -5,6 +5,9 @@ namespace NewBomberman
 {
     public class CameraRotation : MonoBehaviour
     {
+        [Header("References")]
+        [SerializeField] Camera camera = null;
+
         [Header("Configuration")]
         [SerializeField] string mouseXAxisName = "";
         [SerializeField] string mouseYAxisName = "";
@@ -26,21 +29,21 @@ namespace NewBomberman
             float rotateVertical = Input.GetAxis(mouseYAxisName);
 
 
-            //transform.RotateAround(transform.position, Vector3.up, rotateHorizontal * sensitivity); //use transform.Rotate(-transform.up * rotateHorizontal * sensitivity) instead if you dont want the camera to rotate around the player
-            transform.Rotate(transform.up * rotateHorizontal * sensitivity);
-            //Camera.main.transform.RotateAround(transform.position + new Vector3(0.0f, 2.19f, 0.0f), -transform.right, rotateVertical * sensitivity); // again, use transform.Rotate(transform.right * rotateVertical * sensitivity) if you don't want the camera to rotate around the player
-            Camera.main.transform.Rotate(-transform.right * rotateVertical * sensitivity);
+            transform.Rotate(0.0f, rotateHorizontal * sensitivity, 0.0f);
 
-            Camera.main.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, Camera.main.transform.rotation.eulerAngles.y, 0.0f);
+            Vector3 rotation = camera.transform.localEulerAngles;
+            rotation.x = (rotation.x - rotateVertical * sensitivity + 360) % 360;
 
-            if (Camera.main.transform.localRotation.eulerAngles.x > 65.0f && Camera.main.transform.localRotation.eulerAngles.x < 90.0f)
+            if (rotation.x > 80.0f && rotation.x < 180.0f)
             {
-                Camera.main.transform.rotation = Quaternion.Euler(65.0f, Camera.main.transform.rotation.eulerAngles.y, Camera.main.transform.rotation.eulerAngles.z);
+                rotation.x = 80.0f;
             }
-            else if (Camera.main.transform.localRotation.eulerAngles.x > 220.0f && Camera.main.transform.localRotation.eulerAngles.x < 280.0f)
+            else if (rotation.x < 280.0f && rotation.x > 180.0f)
             {
-                Camera.main.transform.rotation = Quaternion.Euler(280.0f, Camera.main.transform.rotation.eulerAngles.y, Camera.main.transform.rotation.eulerAngles.z);
+                rotation.x = 280.0f;
             }
+
+            camera.transform.localEulerAngles = rotation;
         }
     }
 }

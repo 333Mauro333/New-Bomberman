@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\Enums\EnumDirection.cs" />
     <Compile Include="Assets\Scripts\Gameplay Elements\Key.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IObserverDoorState.cs" />
+    <Compile Include="Assets\Scripts\CameraRotation.cs" />
     <Compile Include="Assets\Scripts\Controllers\DoorTextController.cs" />
     <Compile Include="Assets\Scripts\GameManagerReferenceSearcher.cs" />
     <Compile Include="Assets\Scripts\Delegates\DoorStateHandler.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay Elements\Bomb.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
-    <Compile Include="Assets\Scripts\CameraRotation.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -331,6 +331,15 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.7f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.7f1\Editor\Data\PlaybackEngines\AppleTVSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.7f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.7f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.7f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>

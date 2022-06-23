@@ -3,20 +3,24 @@ using UnityEngine;
 
 namespace NewBomberman
 {
-    public class PlayerMovement : CharacterMovement
+    [RequireComponent(typeof(CharacterController))]
+    public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] string upButtonName = "";
         [SerializeField] string downButtonName = "";
         [SerializeField] string leftButtonName = "";
         [SerializeField] string rightButtonName = "";
 
-        LimitMovement lm;
+        [SerializeField] float forwardSpeed = 0.0f;
+        [SerializeField] float lateralSpeed = 0.0f;
+
+        CharacterController cc;
 
 
 
         void Awake()
         {
-            lm = GetComponent<LimitMovement>();
+            cc = GetComponent<CharacterController>();
         }
 
         void Update()
@@ -26,44 +30,44 @@ namespace NewBomberman
 
 
 
-        protected override void Movement()
+        void Movement()
         {
-            if (Input.GetButtonDown(upButtonName) && (!lm.ThereIsAnything(Direction.Up) || lm.ThereIsAnything(Direction.Up, "Key")))
+            if (Input.GetButton(upButtonName))
             {
-                MoveUp();
+                MoveForward();
             }
 
-            if (Input.GetButtonDown(downButtonName) && (!lm.ThereIsAnything(Direction.Down) || lm.ThereIsAnything(Direction.Down, "Key")))
+            if (Input.GetButton(downButtonName))
             {
-                MoveDown();
+                MoveBackward();
             }
 
-            if (Input.GetButtonDown(leftButtonName) && (!lm.ThereIsAnything(Direction.Left) || lm.ThereIsAnything(Direction.Left, "Key")))
+            if (Input.GetButton(leftButtonName))
             {
                 MoveLeft();
             }
 
-            if (Input.GetButtonDown(rightButtonName) && (!lm.ThereIsAnything(Direction.Right) || lm.ThereIsAnything(Direction.Right, "Key")))
+            if (Input.GetButton(rightButtonName))
             {
                 MoveRight();
             }
         }
 
-        protected override void MoveUp()
+        void MoveForward()
         {
-            transform.position += new Vector3(0.0f, 0.0f, 1.0f);
+            cc.SimpleMove(transform.forward * forwardSpeed * Time.deltaTime);
         }
-        protected override void MoveDown()
+        void MoveBackward()
         {
-            transform.position += new Vector3(0.0f, 0.0f, -1.0f);
+            cc.SimpleMove(-transform.forward * (forwardSpeed / 2.0f) * Time.deltaTime);
         }
-        protected override void MoveLeft()
+        void MoveLeft()
         {
-            transform.position += -Vector3.right;
+            cc.SimpleMove(-transform.right * lateralSpeed * Time.deltaTime);
         }
-        protected override void MoveRight()
+        void MoveRight()
         {
-            transform.position += new Vector3(1.0f, 0.0f, 0.0f);
+            cc.SimpleMove(transform.right * lateralSpeed * Time.deltaTime);
         }
     }
 }

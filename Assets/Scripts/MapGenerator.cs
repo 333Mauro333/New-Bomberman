@@ -94,7 +94,7 @@ namespace NewBomberman
 
                             case key:
                                 // Posiciono a la llave.
-                                onTheFloor = keyReference.transform.localScale.y / 2.0f;
+                                onTheFloor = keyReference.transform.localScale.y * 100.0f / 2.0f;
                                 keyReference.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
                                 break;
 

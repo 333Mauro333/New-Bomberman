@@ -36,6 +36,7 @@ namespace NewBomberman
         const char door = 'D';
         const char key = 'K';
 
+        const int scaling = 100;
 
 
         void Awake()
@@ -88,13 +89,13 @@ namespace NewBomberman
                         {
                             case player:
                                 // Posiciono al jugador en su respectiva posición.
-                                onTheFloor = playerReference.transform.localScale.y / 2.0f;
+                                onTheFloor = playerReference.transform.localScale.y;
                                 playerReference.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
                                 break;
 
                             case key:
                                 // Posiciono a la llave.
-                                onTheFloor = keyReference.transform.localScale.y * 100.0f / 2.0f;
+                                onTheFloor = keyReference.transform.localScale.y / 2.0f;
                                 keyReference.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
                                 break;
 
@@ -107,10 +108,11 @@ namespace NewBomberman
                             case enemy:
                                 // Instancio un enemigo y lo ubico en el mapa.
                                 GameObject newEnemy = Instantiate(prefabEnemy);
+                                const float timeToMove = 0.5f;
 
-                                onTheFloor = newEnemy.transform.lossyScale.y * 100;
+                                onTheFloor = newEnemy.transform.lossyScale.y * scaling;
                                 newEnemy.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
-                                newEnemy.GetComponent<EnemyMovement>().SetTimeToMove(0.5f);
+                                newEnemy.GetComponent<EnemyMovement>().SetTimeToMove(timeToMove);
                                 break;
                         }
                     }

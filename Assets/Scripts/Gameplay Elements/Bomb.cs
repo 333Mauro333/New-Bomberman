@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using UnityEngine;
 
 
@@ -8,29 +10,15 @@ namespace NewBomberman
         [SerializeField] float timeToExplode = 0.0f;
         [SerializeField] float range = 1.0f;
 
-        LineRenderer lR;
         float actualTime;
-
         bool explodedByAnotherBomb;
         
 
 
         void Awake()
         {
-            lR = GetComponent<LineRenderer>();
-
-            lR.startWidth = 0.01f;
-            lR.endWidth = 0.01f;
-
             actualTime = timeToExplode;
-
             explodedByAnotherBomb = false;
-        }
-
-        void Start()
-        {
-            lR.SetPosition(0, transform.position);
-            lR.SetPosition(1, new Vector3(transform.position.x + range, transform.position.y, transform.position.z));
         }
 
         void Update()
@@ -42,10 +30,7 @@ namespace NewBomberman
 
         public void ReachRange()
         {
-            SearchObjective(Direction.Up);
-            SearchObjective(Direction.Down);
-            SearchObjective(Direction.Left);
-            SearchObjective(Direction.Right);
+            SeekAndDestroy();
         }
         public void DestroyItSelf()
         {
@@ -65,40 +50,33 @@ namespace NewBomberman
                 Explode();
             }
         }
-        void SearchObjective(Direction direction)
+        void SeekAndDestroy()
         {
+            List<IDestroyable> destroyableGameObjects = new List<IDestroyable>();
             Vector3 vectorD = Vector3.zero;
+            Vector3 diff = new Vector3(0.0f, 0.25f, 0.0f);
             RaycastHit ray;
 
 
-            switch (direction)
+            for (int i = 0; i < 4; i++)
             {
-                case Direction.Up:
-                    vectorD = transform.forward;
-                    break;
+                vectorD = GetVectorDirection((Direction)i);
 
-                case Direction.Down:
-                    vectorD = -transform.forward;
-                    break;
+                if (Physics.Raycast(transform.position + diff, vectorD, out ray, range))
+                {
+                    IDestroyable iD = ray.transform.gameObject.GetComponent<IDestroyable>();
 
-                case Direction.Left:
-                    vectorD = -transform.right;
-                    break;
 
-                case Direction.Right:
-                    vectorD = transform.right;
-                    break;
+                    if (iD != null)
+                    {
+                        destroyableGameObjects.Add(iD);
+                    }
+                }
             }
 
-            if (Physics.Raycast(transform.position, vectorD, out ray, range))
+            for (int i = 0; i < destroyableGameObjects.Count; i++)
             {
-                IDestroyable iD = ray.transform.gameObject.GetComponent<IDestroyable>();
-
-
-                if (iD != null)
-                {
-                    iD.DestroyItSelf();
-                }
+                destroyableGameObjects[i].DestroyItSelf();
             }
         }
         void ResetValues()
@@ -112,6 +90,33 @@ namespace NewBomberman
             ReachRange();
             ResetValues();
             gameObject.SetActive(false);
+        }
+
+        Vector3 GetVectorDirection(Direction direction)
+        {
+            Vector3 vectorToReturn = Vector3.zero;
+
+
+            switch (direction)
+            {
+                case Direction.Up:
+                    vectorToReturn = transform.forward;
+                    break;
+
+                case Direction.Down:
+                    vectorToReturn = -transform.forward;
+                    break;
+
+                case Direction.Left:
+                    vectorToReturn = -transform.right;
+                    break;
+
+                case Direction.Right:
+                    vectorToReturn = transform.right;
+                    break;
+            }
+
+            return vectorToReturn;
         }
     }
 }

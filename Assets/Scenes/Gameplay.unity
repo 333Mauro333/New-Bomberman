@@ -326,7 +326,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788999e10c3979547b04c4aef42b99b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p: {fileID: 1316869773}
+--- !u!65 &418905249
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418905244}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 29.103596, y: 33.7436, z: 3.5216007}
+  m_Center: {x: -0.0000019073486, y: 16.8718, z: 0.0000009536743}
 --- !u!1 &480005924
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +469,7 @@ MonoBehaviour:
   prefabTile: {fileID: 8746106492786721540, guid: 422f8cba5ea0edf4aae2f8b1e815cb01, type: 3}
   prefabUnbreakableBlock: {fileID: 8907402041316917449, guid: baa902db8645e8d499d2013fbf6771e7, type: 3}
   prefabBreakableBlock: {fileID: 1989375398428159588, guid: 7cb1f1f791089b94e993f1beb5cbec1f, type: 3}
+  distanceToTheFloor: {x: 0, y: 0.25, z: 0}
 --- !u!4 &522153598
 Transform:
   m_ObjectHideFlags: 0
@@ -958,6 +971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p: {fileID: 1316869773}
+  k: {fileID: 418905245}
   d: {fileID: 1944873898}
   dtc: {fileID: 930349750}
 --- !u!1 &867576110
@@ -1090,7 +1104,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.4
+  m_fontSize: 22.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1353,7 +1367,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.4
+  m_fontSize: 27.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1706,15 +1720,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316869765}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.23, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 963194228}
   - {fileID: 480005925}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1316869770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1771,8 +1785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298d2ddbc9a53ad4798edd51ae20cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: {fileID: 418905245}
-  door: {fileID: 1944873893}
 --- !u!114 &1316869774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1951,7 +1963,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.4
+  m_fontSize: 27.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2060,6 +2072,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key_F
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4d41baf574483da4a9982960d1d06e2f, type: 3}
+      propertyPath: m_TagString
+      value: Key
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d41baf574483da4a9982960d1d06e2f, type: 3}
 --- !u!1 &1787955928
@@ -2153,7 +2169,7 @@ GameObject:
   - component: {fileID: 1944873898}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2166,7 +2182,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1944873893}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

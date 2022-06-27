@@ -20,6 +20,8 @@ namespace NewBomberman
         [SerializeField] GameObject prefabUnbreakableBlock = null;
         [SerializeField] GameObject prefabBreakableBlock = null;
 
+        [Header("Configuration")]
+        [SerializeField] Vector3 distanceToTheFloor = Vector3.zero;
 
         FileStream fileStreamOpen;
         StreamReader streamReader;
@@ -36,7 +38,6 @@ namespace NewBomberman
         const char door = 'D';
         const char key = 'K';
 
-        const int scaling = 100;
 
 
         void Awake()
@@ -110,7 +111,8 @@ namespace NewBomberman
                                 GameObject newEnemy = Instantiate(prefabEnemy);
                                 const float timeToMove = 0.5f;
 
-                                onTheFloor = newEnemy.transform.lossyScale.y * scaling;
+
+                                onTheFloor = newEnemy.transform.localScale.y + distanceToTheFloor.y;
                                 newEnemy.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
                                 newEnemy.GetComponent<EnemyMovement>().SetTimeToMove(timeToMove);
                                 break;

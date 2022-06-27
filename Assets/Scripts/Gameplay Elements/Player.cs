@@ -5,13 +5,9 @@ namespace NewBomberman
 {
     public class Player : MonoBehaviour, IDestroyable, IPointsSubject, IDoorStateSubject
     {
-        [SerializeField] Key key = null;
-        [SerializeField] GameObject door = null;
-
         GameManager gm = null;
 
         int points;
-        bool doorIsOpen;
 
         public ScoreChangeHandler scoreChangeEvent;
         public DoorStateHandler doorStateChangeEvent;
@@ -21,7 +17,6 @@ namespace NewBomberman
         void Awake()
         {
             points = 0;
-            doorIsOpen = false;
         }
 
         void Start()
@@ -29,27 +24,30 @@ namespace NewBomberman
             gm = FindObjectOfType<GameManager>();
         }
 
-        void Update()
+        void OnTriggerEnter(Collider other)
         {
-            // Usé esta forma porque con el "OnCollisionEnter" no me funcionaba y no tuve suficiente tiempo para tratar de verificar bien a qué se debía
-            // esto.
-            if (key != null && transform.position.x == key.gameObject.transform.position.x && transform.position.z == key.gameObject.transform.position.z)
+            if (other.gameObject.CompareTag("Key"))
             {
-                key.DestroyAndOpenDoor();
+                doorStateChangeEvent(true);
             }
-            else if (transform.position.x == door.transform.position.x && transform.position.z == door.transform.position.z)
+
+            if (other.gameObject.CompareTag("Door"))
             {
-                gm.SetFinalGame(points, true);
-                gm.LoadScene("Results Scene");
+                EndGame(true);
+            }
+
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                EndGame(false);
             }
         }
 
 
 
+
         public void DestroyItSelf()
         {
-            gm.SetFinalGame(points, false);
-            gm.LoadScene("Results Scene");
+            EndGame(false);
         }
 
         public void NotifyChangePoints(int newPoints)
@@ -60,7 +58,6 @@ namespace NewBomberman
 
         public void NotifyDoorStateChange(bool isOpen)
         {
-            doorIsOpen = isOpen;
             doorStateChangeEvent(isOpen);
         }
 
@@ -70,10 +67,10 @@ namespace NewBomberman
             NotifyChangePoints(points);
         }
 
-        public void ChangeDoorState(bool isOpen)
+        void EndGame(bool win)
         {
-            doorIsOpen = isOpen;
-            doorStateChangeEvent(true);
+            gm.SetFinalGame(points, win);
+            gm.LoadScene("Results Scene");
         }
     }
 }

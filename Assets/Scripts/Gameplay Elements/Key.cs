@@ -5,14 +5,9 @@ namespace NewBomberman
 {
     public class Key : MonoBehaviour
     {
-        [SerializeField] Player p = null;
-
-
-
-        public void DestroyAndOpenDoor()
+        public void SetState(bool exists)
         {
-            p.ChangeDoorState(true);
-            Destroy(gameObject);
+            gameObject.SetActive(!exists);
         }
     }
 }

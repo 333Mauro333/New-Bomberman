@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace NewBomberman
 {
+    [RequireComponent(typeof(BoxCollider))]
     public class Door : MonoBehaviour
     {
         BoxCollider bc = null;
@@ -18,10 +19,7 @@ namespace NewBomberman
 
         public void UpdateBoxColliderState(bool isOpen)
         {
-            if (bc != null && isOpen)
-            {
-                Destroy(bc);
-            }
+            bc.isTrigger = isOpen;
         }
     }
 }

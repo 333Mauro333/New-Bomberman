@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 535108821031795469}
   - component: {fileID: 535108821031795468}
   - component: {fileID: 535108821031795471}
+  - component: {fileID: 5766957915992721621}
   m_Layer: 0
   m_Name: Prefab Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6664358993437552698, guid: 1f8ae5a47df596f419fdc9c9b0e3216c, type: 3}
+  - {fileID: 2100000, guid: 9ebc70d290cba6946ad5a605ce9a69c6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,4 +121,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ff6f8e0e7532b4fb81b1f82de376e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p: {fileID: 0}
+--- !u!65 &5766957915992721621
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841187361735444056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 36.816856, y: 90.42412, z: 34}
+  m_Center: {x: 0, y: 45.21206, z: 10.7}

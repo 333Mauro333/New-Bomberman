@@ -5,8 +5,11 @@ namespace NewBomberman
 {
     public class DoorStateSuscriberManager : MonoBehaviour
     {
-        [Header("References")]
+        [Header("Event")]
         [SerializeField] Player p = null;
+
+        [Header("Suscriptors")]
+        [SerializeField] Key k = null;
         [SerializeField] Door d = null;
         [SerializeField] DoorTextController dtc = null;
 
@@ -16,6 +19,7 @@ namespace NewBomberman
         {
             p.doorStateChangeEvent += dtc.UpdateDoorState;
             p.doorStateChangeEvent += d.UpdateBoxColliderState;
+            p.doorStateChangeEvent += k.SetState;
         }
     }
 }

@@ -1,11 +1,11 @@
 XXXXXXXXXXXXXXXXXXXXXXXXX     
 XP ----    --  E    --- X
 X U U U U U U U   U  -UUX
-X----     -- E -       -X
-X U U UEU U U U   U   U X
+X----     --   -       -X
+X U U U U U U U   U   U X
 X --  ----    --      --X
 X-U U U U U U U   U   UUX
-X- ---E    ----       --X
+X- ---     ----       --X
 X-U U U U U U U U U---U-XXXXXX
-XK-E---- ---- -   UUUUU-D    X
+XK- ---- ---- -   UUUUU-D    X
 XXXXXXXXXXXXXXXXXXXXXXXXXXXX X

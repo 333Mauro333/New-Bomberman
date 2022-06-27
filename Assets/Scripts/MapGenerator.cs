@@ -12,10 +12,10 @@ namespace NewBomberman
         [SerializeField] GameObject playerReference = null;
         [SerializeField] GameObject keyReference = null;
         [SerializeField] GameObject doorReference = null;
+        [SerializeField] GameObject enemyReference = null;
 
         [Header("Prefabs")]
         [SerializeField] GameObject prefabBorderBlock = null;
-        [SerializeField] GameObject prefabEnemy = null;
         [SerializeField] GameObject prefabTile = null;
         [SerializeField] GameObject prefabUnbreakableBlock = null;
         [SerializeField] GameObject prefabBreakableBlock = null;
@@ -107,14 +107,8 @@ namespace NewBomberman
                                 break;
 
                             case enemy:
-                                // Instancio un enemigo y lo ubico en el mapa.
-                                GameObject newEnemy = Instantiate(prefabEnemy);
-                                const float timeToMove = 0.5f;
-
-
-                                onTheFloor = newEnemy.transform.localScale.y + distanceToTheFloor.y;
-                                newEnemy.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
-                                newEnemy.GetComponent<EnemyMovement>().SetTimeToMove(timeToMove);
+                                onTheFloor = enemyReference.transform.localScale.y + distanceToTheFloor.y;
+                                enemyReference.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
                                 break;
                         }
                     }

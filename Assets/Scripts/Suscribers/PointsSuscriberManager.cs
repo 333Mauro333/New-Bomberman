@@ -15,12 +15,12 @@ namespace NewBomberman
 
         void OnEnable()
         {
-            p.scoreChangeEvent += ptc.UpdatePoints;
+            Player.onScoreChange += ptc.UpdatePoints;
         }
 
         void OnDisable()
         {
-            p.scoreChangeEvent -= ptc.UpdatePoints;
+            Player.onScoreChange -= ptc.UpdatePoints;
         }
     }
 }

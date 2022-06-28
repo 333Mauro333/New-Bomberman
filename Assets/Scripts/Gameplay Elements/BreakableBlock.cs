@@ -5,7 +5,7 @@ namespace NewBomberman
 {
     public class BreakableBlock : MonoBehaviour, IDestroyable
     {
-        [SerializeField] int blockValue = 0;
+        [SerializeField] int blockValue = 10;
 
         Player p;
 

@@ -1,3 +1,5 @@
+using System;
+
 using UnityEngine;
 
 
@@ -5,11 +7,11 @@ namespace NewBomberman
 {
     public class Player : MonoBehaviour, IDestroyable, IPointsSubject
     {
-        public ScoreChangeHandler scoreChangeEvent;
+        public static Action<int> onScoreChange;
 
         GameManager gm = null;
 
-        public int points;
+        int points;
 
 
 
@@ -61,11 +63,7 @@ namespace NewBomberman
 
         public void NotifyChangePoints(int newPoints)
         {
-            if (scoreChangeEvent != null)
-            {
-                Debug.Log("Grita evento.");
-                scoreChangeEvent(newPoints);
-            }
+            onScoreChange?.Invoke(newPoints);
         }
 
         void EndGame(bool win)

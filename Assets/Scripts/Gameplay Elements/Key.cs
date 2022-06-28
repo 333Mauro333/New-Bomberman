@@ -1,3 +1,5 @@
+using System;
+
 using UnityEngine;
 
 
@@ -5,7 +7,7 @@ namespace NewBomberman
 {
     public class Key : MonoBehaviour, IPickable
     {
-        public PickableItemHandler pickedEvent;
+        public Action pickedEvent;
 
 
 

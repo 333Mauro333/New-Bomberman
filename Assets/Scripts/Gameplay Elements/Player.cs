@@ -61,13 +61,10 @@ namespace NewBomberman
 
         public void NotifyChangePoints(int newPoints)
         {
-
-
             if (scoreChangeEvent != null)
             {
                 Debug.Log("Grita evento.");
                 scoreChangeEvent(newPoints);
-
             }
         }
 

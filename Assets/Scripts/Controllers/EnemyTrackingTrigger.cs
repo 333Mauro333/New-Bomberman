@@ -7,7 +7,7 @@ namespace NewBomberman
     {
         [Header("References")]
         [SerializeField] GameObject player = null;
-        [SerializeField] Enemy enemy = null;
+        [SerializeField] EnemyMovement enemy = null;
 
 
 

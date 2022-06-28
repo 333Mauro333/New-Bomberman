@@ -5,22 +5,27 @@ using TMPro;
 
 namespace NewBomberman
 {
-    public class DoorTextController : MonoBehaviour
+    public class DoorTextController : MonoBehaviour, IObserverDoorState
     {
+        [Header("Door State Messages")]
+        [SerializeField] string openMessage = "";
+        [SerializeField] string closedMessage = "";
+
         [Header("References")]
         [SerializeField] TextMeshProUGUI tmpReference;
 
 
 
-        public void UpdateDoorState(bool doorIsOpen)
+
+        public void UpdateDoorState(bool isOpen)
         {
-            if (doorIsOpen)
+            if (isOpen)
             {
-                tmpReference.text = "DOOR STATE:\nOPEN";
+                tmpReference.text = openMessage;
             }
             else
             {
-                tmpReference.text = "DOOR STATE:\nCLOSED";
+                tmpReference.text = closedMessage;
             }
         }
     }

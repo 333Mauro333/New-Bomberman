@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace NewBomberman
 {
-    public class Bomb : MonoBehaviour, IReachable, IDestroyable
+    public class Bomb : MonoBehaviour, IDestroyable
     {
+        [Header("Setting Values")]
         [SerializeField] float timeToExplode = 0.0f;
-        [SerializeField] float range = 1.0f;
+        [SerializeField] float range = 3.0f;
 
         float actualTime;
         bool explodedByAnotherBomb;
@@ -28,10 +29,6 @@ namespace NewBomberman
 
 
 
-        public void ReachRange()
-        {
-            SeekAndDestroy();
-        }
         public void DestroyItSelf()
         {
             if (!explodedByAnotherBomb)
@@ -53,14 +50,13 @@ namespace NewBomberman
         void SeekAndDestroy()
         {
             List<IDestroyable> destroyableGameObjects = new List<IDestroyable>();
-            Vector3 vectorD = Vector3.zero;
             Vector3 diff = new Vector3(0.0f, 0.25f, 0.0f);
             RaycastHit ray;
 
 
             for (int i = 0; i < 4; i++)
             {
-                vectorD = GetVectorDirection((Direction)i);
+                Vector3 vectorD = GetVectorDirection((Direction)i);
 
                 if (Physics.Raycast(transform.position + diff, vectorD, out ray, range))
                 {
@@ -87,7 +83,7 @@ namespace NewBomberman
 
         void Explode()
         {
-            ReachRange();
+            SeekAndDestroy();
             ResetValues();
             gameObject.SetActive(false);
         }

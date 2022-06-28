@@ -8,7 +8,7 @@ namespace NewBomberman
     public class PointsTextController : MonoBehaviour, IObserverPoints
     {
         [Header("References")]
-        [SerializeField] TextMeshProUGUI tmpReference;
+        [SerializeField] TextMeshProUGUI tmpReference = null;
 
         int points;
 
@@ -18,6 +18,7 @@ namespace NewBomberman
         {
             points = 0;
         }
+
 
 
         public void UpdatePoints(int points)

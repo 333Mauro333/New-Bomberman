@@ -21,15 +21,16 @@ namespace NewBomberman
         [SerializeField] GameObject prefabBreakableBlock = null;
 
         [Header("Configuration")]
-        [SerializeField] Vector3 distanceToTheFloor = Vector3.zero;
+        [SerializeField] Vector3 distanceFromEnemyToGround = Vector3.zero; // Distancia del piso para el enemigo.
 
-        FileStream fileStreamOpen;
-        StreamReader streamReader;
+        FileStream fileStreamOpen; // Campo que se ocupa de cargar el archivo de texto.
+        StreamReader streamReader; // Campo que se ocupa de leer el archivo.
 
-        List<string> stringMap;
+        List<string> stringMap; // Lista de strings, la cual va a guardar el mapa.
 
-        GameObject[,] tileMap;
+        GameObject[,] tileMap; // Arreglo bidimensional de los casilleros que conforman el piso.
 
+        // Carácteres para interpretar las letras del mapa de texto.
         const char border = 'X';
         const char player = 'P';
         const char enemy = 'E';
@@ -80,12 +81,14 @@ namespace NewBomberman
             {
                 for (int j = 0; j < stringMap[i].Length; j++)
                 {
-                    if (IsABlock(stringMap[i][j]))
+                    if (IsABlock(stringMap[i][j])) // Si lo generado en esta posición es un bloque...
                     {
+                        // Genero el bloque correspondiente.
                         gB(stringMap[i][j], tileMap[i, j].transform.position.x, tileMap[i, j].transform.position.z);
                     }
-                    else
+                    else // De lo contrario...
                     {
+                        // Evalúo y reacciono.
                         switch (stringMap[i][j])
                         {
                             case player:
@@ -107,7 +110,8 @@ namespace NewBomberman
                                 break;
 
                             case enemy:
-                                onTheFloor = enemyReference.transform.localScale.y + distanceToTheFloor.y;
+                                // Posiciono al enemigo.
+                                onTheFloor = enemyReference.transform.localScale.y + distanceFromEnemyToGround.y;
                                 enemyReference.transform.position = new Vector3(tileMap[i, j].transform.position.x, onTheFloor, tileMap[i, j].transform.position.z);
                                 break;
                         }
@@ -122,7 +126,7 @@ namespace NewBomberman
         {
             GameObject newBlock = null;
 
-
+            // Instancio el bloque correspondiente.
             if (blockType == unbreakableBlock)
             {
                 newBlock = Instantiate(prefabUnbreakableBlock);
@@ -136,6 +140,7 @@ namespace NewBomberman
                 newBlock = Instantiate(prefabBorderBlock);
             }
 
+            // Para evitar errores si se intenta mover la posición de un objeto nulo.
             if (newBlock != null)
             {
                 newBlock.transform.position = new Vector3(x, newBlock.transform.localScale.y / 2.0f, z);

@@ -7,8 +7,6 @@ namespace NewBomberman
 {
     public class ToggleController : MonoBehaviour
     {
-
-
         GameManager gm = null;
 
 
@@ -16,12 +14,6 @@ namespace NewBomberman
         void Start()
         {
             gm = FindObjectOfType<GameManager>();
-
-        }
-
-        void Update()
-        {
-
         }
     }
 }

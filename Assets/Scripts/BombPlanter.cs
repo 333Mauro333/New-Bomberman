@@ -7,30 +7,34 @@ namespace NewBomberman
 {
     public class BombPlanter : MonoBehaviour
     {
-        [SerializeField] GameObject prefabBomb = null;
+        [Header("Button Names")]
         [SerializeField] string bombButtonName = "";
+        
+        [Header("Prefabs")]
+        [SerializeField] GameObject prefabBomb = null;
 
-        List<Bomb> bombs;
-        ushort defaultSize;
+        [Header("Configuration")]
+        [SerializeField] ushort bombsAmount; // Cantidad de bombas que se van a poder colocar simultáneamente.
+
+
+        List<Bomb> bombs; // Lista de bombas.
 
 
 
         void Awake()
         {
             bombs = new List<Bomb>();
-
-            defaultSize = 2;
         }
 
         void Start()
         {
-            for (int i = 0; i < defaultSize; i++)
+            for (int i = 0; i < bombsAmount; i++)
             {
                 GameObject currBomb = Instantiate(prefabBomb);
 
 
-                bombs.Add(currBomb.GetComponent<Bomb>());
                 currBomb.SetActive(false);
+                bombs.Add(currBomb.GetComponent<Bomb>());
             }
         }
 
@@ -43,6 +47,7 @@ namespace NewBomberman
         }
 
 
+
         void PutBomb()
         {
             for (int i = 0; i < bombs.Count; i++)
@@ -51,7 +56,6 @@ namespace NewBomberman
                 {
                     bombs[i].gameObject.SetActive(true);
                     bombs[i].transform.position = new Vector3(transform.position.x, transform.position.y - transform.localScale.y + bombs[i].transform.localScale.y / 2.0f, transform.position.z);
-
                     break;
                 }
             }

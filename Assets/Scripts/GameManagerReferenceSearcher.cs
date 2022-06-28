@@ -5,7 +5,7 @@ namespace NewBomberman
 {
     public class GameManagerReferenceSearcher : MonoBehaviour
     {
-        public GameManager instance = null;
+        GameManager instance = null;
 
 
 
@@ -13,6 +13,7 @@ namespace NewBomberman
         {
             instance = FindObjectOfType<GameManager>();
         }
+
 
 
         public void LoadScene(string sceneName)

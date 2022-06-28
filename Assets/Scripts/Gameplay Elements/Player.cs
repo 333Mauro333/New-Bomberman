@@ -5,12 +5,12 @@ namespace NewBomberman
 {
     public class Player : MonoBehaviour, IDestroyable, IPointsSubject, IDoorStateSubject
     {
+        public ScoreChangeHandler scoreChangeEvent;
+        public DoorStateHandler doorStateChangeEvent;
+
         GameManager gm = null;
 
         int points;
-
-        public ScoreChangeHandler scoreChangeEvent;
-        public DoorStateHandler doorStateChangeEvent;
 
 
 
@@ -28,6 +28,7 @@ namespace NewBomberman
         {
             if (other.gameObject.CompareTag("Key"))
             {
+                Debug.Log("Entró");
                 doorStateChangeEvent(true);
             }
 
@@ -44,27 +45,28 @@ namespace NewBomberman
 
 
 
-
         public void DestroyItSelf()
         {
             EndGame(false);
         }
 
+        public void AddPoints(int pointsToAdd)
+        {
+            if (pointsToAdd > 0)
+            {
+                points += pointsToAdd;
+                NotifyChangePoints(points);
+            }
+        }
+
         public void NotifyChangePoints(int newPoints)
         {
-            points = newPoints;
-            scoreChangeEvent(points);
+            scoreChangeEvent?.Invoke(newPoints);
         }
 
         public void NotifyDoorStateChange(bool isOpen)
         {
-            doorStateChangeEvent(isOpen);
-        }
-
-        public void AddPoints(int pointsToAdd)
-        {
-            points += pointsToAdd;
-            NotifyChangePoints(points);
+            doorStateChangeEvent?.Invoke(isOpen);
         }
 
         void EndGame(bool win)

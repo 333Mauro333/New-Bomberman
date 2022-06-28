@@ -469,7 +469,7 @@ MonoBehaviour:
   prefabTile: {fileID: 8746106492786721540, guid: 422f8cba5ea0edf4aae2f8b1e815cb01, type: 3}
   prefabUnbreakableBlock: {fileID: 8907402041316917449, guid: baa902db8645e8d499d2013fbf6771e7, type: 3}
   prefabBreakableBlock: {fileID: 1989375398428159588, guid: 7cb1f1f791089b94e993f1beb5cbec1f, type: 3}
-  distanceToTheFloor: {x: 0, y: 0.25, z: 0}
+  distanceFromEnemyToGround: {x: 0, y: 0.25, z: 0}
 --- !u!4 &522153598
 Transform:
   m_ObjectHideFlags: 0
@@ -1104,7 +1104,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.35
+  m_fontSize: 20.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1183,6 +1183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fadbbe45d3fa148857eb7a496740f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openMessage: 'DOOR STATE: OPEN'
+  closedMessage: 'DOOR STATE: CLOSED'
   tmpReference: {fileID: 882021215}
 --- !u!4 &930349751
 Transform:
@@ -1339,7 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1316869765}
-  enemy: {fileID: 1425347187}
+  enemy: {fileID: 1893675689}
 --- !u!1 &1018054961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,7 +1428,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.5
+  m_fontSize: 24.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1806,6 +1808,7 @@ MonoBehaviour:
   rightButtonName: RHPlayerRight
   forwardSpeed: 3
   lateralSpeed: 3
+  backwardsGoesHalfSpeed: 0
 --- !u!114 &1316869771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1818,8 +1821,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59bfc6493b79cfa47be0ff1c73f17de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBomb: {fileID: 4220453001363478444, guid: e1d16f3ec2ac7b640b736e434b67ac7f, type: 3}
   bombButtonName: RHPlayerBomb
+  prefabBomb: {fileID: 4220453001363478444, guid: e1d16f3ec2ac7b640b736e434b67ac7f, type: 3}
+  bombsAmount: 2
 --- !u!114 &1316869772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1829,7 +1833,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1316869765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0431f7408eed9b34f934ac64b2cb8673, type: 3}
+  m_Script: {fileID: 11500000, guid: 298d2ddbc9a53ad4798edd51ae20cf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1316869773
@@ -1856,26 +1860,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38070ebf55bd50e42b8ac50437732e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 963194227}
   mouseXAxisName: MouseXAxis
   mouseYAxisName: MouseYAxis
+  camera: {fileID: 963194227}
   sensitivity: 5
+  verticalDownAngle: 80
 --- !u!1 &1425347185 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 841187361735444056, guid: 0bf17f39e40bb2a4eb14708c3d5c8894, type: 3}
   m_PrefabInstance: {fileID: 1893675688}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1425347187 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 535108821031795471, guid: 0bf17f39e40bb2a4eb14708c3d5c8894, type: 3}
-  m_PrefabInstance: {fileID: 1893675688}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425347185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63ff6f8e0e7532b4fb81b1f82de376e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1443613512
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,7 +2032,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.5
+  m_fontSize: 24.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2290,6 +2284,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bf17f39e40bb2a4eb14708c3d5c8894, type: 3}
+--- !u!114 &1893675689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 856718233670260312, guid: 0bf17f39e40bb2a4eb14708c3d5c8894, type: 3}
+  m_PrefabInstance: {fileID: 1893675688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425347185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ebbb8db40ad39f4d8fb1b3a15a22af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1944873893
 GameObject:
   m_ObjectHideFlags: 0

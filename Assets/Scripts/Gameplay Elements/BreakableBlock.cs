@@ -5,13 +5,29 @@ namespace NewBomberman
 {
     public class BreakableBlock : MonoBehaviour, IDestroyable
     {
-        const int blockValue = 10;
+        [SerializeField] int blockValue = 0;
 
+        Player p;
+
+
+
+        void Start()
+        {
+            p = FindObjectOfType<Player>();
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                DestroyItSelf();
+            }
+        }
 
 
         public void DestroyItSelf()
         {
-            FindObjectOfType<Player>().AddPoints(blockValue);
+            p.AddPoints(blockValue);
             Destroy(gameObject);
         }
     }

@@ -48,8 +48,6 @@ namespace NewBomberman
             #endif
         }
 
-
-
         public void SetFinalGame(int score, bool win)
         {
             this.score = score;

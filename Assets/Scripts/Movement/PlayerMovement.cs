@@ -6,49 +6,75 @@ namespace NewBomberman
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("Configuration")]
+        [Header("Button Names")]
         [SerializeField] string upButtonName = "";
         [SerializeField] string downButtonName = "";
         [SerializeField] string leftButtonName = "";
         [SerializeField] string rightButtonName = "";
 
+        [Header("Speed Values")]
         [SerializeField] float forwardSpeed = 0.0f;
         [SerializeField] float lateralSpeed = 0.0f;
 
+        [SerializeField] bool backwardsGoesHalfSpeed = false;
+
+
         CharacterController cc;
+
+        bool isMovingForward;
+        bool isMovingBackward;
+        bool isMovingLeft;
+        bool isMovingRight;
 
 
 
         void Awake()
         {
             cc = GetComponent<CharacterController>();
+
+            isMovingForward = false;
+            isMovingBackward = false;
+            isMovingLeft = false;
+            isMovingRight = false;
         }
 
         void Update()
+        {
+            CheckMovement();
+        }
+
+        void FixedUpdate()
         {
             Movement();
         }
 
 
 
+        void CheckMovement()
+        {
+            isMovingForward = Input.GetButton(upButtonName);
+            isMovingBackward = Input.GetButton(downButtonName);
+            isMovingLeft = Input.GetButton(leftButtonName);
+            isMovingRight = Input.GetButton(rightButtonName);
+        }
         void Movement()
         {
-            if (Input.GetButton(upButtonName))
+            if (isMovingForward)
             {
                 MoveForward();
             }
 
-            if (Input.GetButton(downButtonName))
+            if (isMovingBackward)
             {
                 MoveBackward();
             }
 
-            if (Input.GetButton(leftButtonName))
+            if (isMovingLeft)
             {
                 MoveLeft();
             }
 
-            if (Input.GetButton(rightButtonName))
+            if (isMovingRight)
             {
                 MoveRight();
             }
@@ -60,7 +86,14 @@ namespace NewBomberman
         }
         void MoveBackward()
         {
-            cc.Move(-transform.forward * (forwardSpeed / 2.0f) * Time.deltaTime);
+            if (backwardsGoesHalfSpeed)
+            {
+                cc.Move(-transform.forward * (forwardSpeed / 2.0f) * Time.deltaTime);
+            }
+            else
+            {
+                cc.Move(-transform.forward * forwardSpeed * Time.deltaTime);
+            }
         }
         void MoveLeft()
         {

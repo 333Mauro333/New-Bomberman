@@ -5,8 +5,10 @@ namespace NewBomberman
 {
     public class PointsSuscriberManager : MonoBehaviour
     {
-        [Header("References")]
+        [Header("Object Event")]
         [SerializeField] Player p = null;
+
+        [Header("Suscriptors")]
         [SerializeField] PointsTextController ptc = null;
 
 

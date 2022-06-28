@@ -5,7 +5,7 @@ namespace NewBomberman
 {
     public class DoorStateSuscriberManager : MonoBehaviour
     {
-        [Header("Event")]
+        [Header("Object Event")]
         [SerializeField] Player p = null;
 
         [Header("Suscriptors")]
@@ -17,9 +17,9 @@ namespace NewBomberman
 
         void Start()
         {
-            p.doorStateChangeEvent += dtc.UpdateDoorState;
-            p.doorStateChangeEvent += d.UpdateBoxColliderState;
             p.doorStateChangeEvent += k.SetState;
+            p.doorStateChangeEvent += d.UpdateBoxColliderState;
+            p.doorStateChangeEvent += dtc.UpdateDoorState;
         }
     }
 }

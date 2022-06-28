@@ -16,17 +16,16 @@ namespace NewBomberman
 
 
 
-
-        public void UpdateDoorState(bool isOpen)
+        void Start()
         {
-            if (isOpen)
-            {
-                tmpReference.text = openMessage;
-            }
-            else
-            {
-                tmpReference.text = closedMessage;
-            }
+            tmpReference.text = closedMessage;
+        }
+
+
+
+        public void ChangeDoorStateMessage()
+        {
+            tmpReference.text = openMessage;
         }
     }
 }

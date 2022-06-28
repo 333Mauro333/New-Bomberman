@@ -64,7 +64,7 @@
     <Compile Include="Assets\Scripts\Movement\CameraRotation.cs" />
     <Compile Include="Assets\Scripts\Controllers\DoorTextController.cs" />
     <Compile Include="Assets\Scripts\GameManagerReferenceSearcher.cs" />
-    <Compile Include="Assets\Scripts\Delegates\DoorStateHandler.cs" />
+    <Compile Include="Assets\Scripts\Delegates\PickableItemHandler.cs" />
     <Compile Include="Assets\Scripts\Controllers\ToggleController.cs" />
     <Compile Include="Assets\Scripts\Gameplay Elements\Player.cs" />
     <Compile Include="Assets\Scripts\Controllers\EnemyTrackingTrigger.cs" />
@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay Elements\Bomb.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IPickable.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

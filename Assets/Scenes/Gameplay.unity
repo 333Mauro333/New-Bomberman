@@ -970,7 +970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad06e1d54cca2154097618247e75cdec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p: {fileID: 1316869773}
   k: {fileID: 418905245}
   d: {fileID: 1944873898}
   dtc: {fileID: 930349750}
@@ -2323,7 +2322,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1944873893}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

@@ -13,9 +13,14 @@ namespace NewBomberman
 
 
 
-        void Start()
+        void OnEnable()
         {
             p.scoreChangeEvent += ptc.UpdatePoints;
+        }
+
+        void OnDisable()
+        {
+            p.scoreChangeEvent -= ptc.UpdatePoints;
         }
     }
 }

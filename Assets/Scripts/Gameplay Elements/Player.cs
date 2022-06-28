@@ -3,14 +3,13 @@ using UnityEngine;
 
 namespace NewBomberman
 {
-    public class Player : MonoBehaviour, IDestroyable, IPointsSubject, IDoorStateSubject
+    public class Player : MonoBehaviour, IDestroyable, IPointsSubject
     {
         public ScoreChangeHandler scoreChangeEvent;
-        public DoorStateHandler doorStateChangeEvent;
 
         GameManager gm = null;
 
-        int points;
+        public int points;
 
 
 
@@ -26,10 +25,11 @@ namespace NewBomberman
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Key"))
+            IPickable iP = other.gameObject.GetComponent<IPickable>();
+
+            if (iP != null)
             {
-                Debug.Log("Entró");
-                doorStateChangeEvent(true);
+                iP.Pick();
             }
 
             if (other.gameObject.CompareTag("Door"))
@@ -61,12 +61,14 @@ namespace NewBomberman
 
         public void NotifyChangePoints(int newPoints)
         {
-            scoreChangeEvent?.Invoke(newPoints);
-        }
 
-        public void NotifyDoorStateChange(bool isOpen)
-        {
-            doorStateChangeEvent?.Invoke(isOpen);
+
+            if (scoreChangeEvent != null)
+            {
+                Debug.Log("Grita evento.");
+                scoreChangeEvent(newPoints);
+
+            }
         }
 
         void EndGame(bool win)

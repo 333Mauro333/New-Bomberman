@@ -17,9 +17,9 @@ namespace NewBomberman
 
 
 
-        public void UpdateBoxColliderState(bool isOpen)
+        public void ConvertColliderToTrigger()
         {
-            bc.isTrigger = isOpen;
+            bc.isTrigger = true;
         }
     }
 }

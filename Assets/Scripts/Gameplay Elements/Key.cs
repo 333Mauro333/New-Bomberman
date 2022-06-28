@@ -3,11 +3,16 @@ using UnityEngine;
 
 namespace NewBomberman
 {
-    public class Key : MonoBehaviour
+    public class Key : MonoBehaviour, IPickable
     {
-        public void SetState(bool exists)
+        public PickableItemHandler pickedEvent;
+
+
+
+        public void Pick()
         {
-            gameObject.SetActive(!exists);
+            pickedEvent?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

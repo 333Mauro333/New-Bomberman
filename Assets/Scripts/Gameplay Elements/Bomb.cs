@@ -27,6 +27,21 @@ namespace NewBomberman
             SubtractTime();
         }
 
+		void OnTriggerEnter(Collider other)
+		{
+            RaycastHit raycastHit;
+
+            if (Physics.Raycast(transform.position, other.transform.position - transform.position, out raycastHit, range))
+            {
+                IDestroyable id = raycastHit.transform.gameObject.GetComponent<IDestroyable>();
+
+                if (id != null)
+				{
+                    Debug.Log("Objeto detectado: " + raycastHit.transform.gameObject.name);
+                    //id.DestroyItSelf();
+				}
+            }
+		}
 
 
         public void DestroyItSelf()

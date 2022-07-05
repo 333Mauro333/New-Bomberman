@@ -9,6 +9,7 @@ TagManager:
   - Key
   - Scene Manager
   - Door
+  - Bomb
   layers:
   - Default
   - TransparentFX

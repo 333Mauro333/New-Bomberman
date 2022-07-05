@@ -5,27 +5,33 @@ using UnityEngine;
 
 namespace NewBomberman
 {
-    public class Bomb : MonoBehaviour, IDestroyable
+    public class Bomb : MonoBehaviour, IDestroyable, IExploiter
     {
         [Header("Setting Values")]
         [SerializeField] float timeToExplode = 0.0f;
+        [SerializeField] float timeExploding = 0.0f;
         [SerializeField] float range = 3.0f;
 
-        float actualTime;
+
+        float actualExplosionTime;
+        float actualExplodingTime;
         bool explodedByAnotherBomb;
 
         SphereCollider sc;
-
-        List<IDestroyable> destroyableList;
+        MeshRenderer mr;
 
 
 
         void Awake()
         {
-            actualTime = timeToExplode;
+            actualExplosionTime = timeToExplode;
+            actualExplodingTime = timeExploding;
             explodedByAnotherBomb = false;
+
             sc = GetComponent<SphereCollider>();
-            destroyableList = new List<IDestroyable>();
+            mr = GetComponent<MeshRenderer>();
+
+            sc.radius *= range;
         }
 
         void Update()
@@ -34,20 +40,6 @@ namespace NewBomberman
             SubtractTime();
         }
 
-		void OnTriggerEnter(Collider other)
-		{
-            RaycastHit raycastHit;
-
-            if (Physics.Raycast(transform.position, other.transform.position - transform.position, out raycastHit, range))
-            {
-                IDestroyable id = raycastHit.transform.gameObject.GetComponent<IDestroyable>();
-
-                if (id != null)
-				{
-                    destroyableList.Add(id);
-				}
-            }
-		}
 
 
         public void DestroyItSelf()
@@ -59,39 +51,46 @@ namespace NewBomberman
             }
         }
 
+        public void Explode()
+        {
+            sc.enabled = true;
+            mr.enabled = false;
+        }
+        public float GetExplosionRange()
+        {
+            return range;
+        }
+
         void SubtractTime()
         {
-            actualTime = (actualTime - Time.deltaTime <= 0.0f) ? 0.0f : actualTime - Time.deltaTime;
+            actualExplosionTime = (actualExplosionTime - Time.deltaTime <= 0.0f) ? 0.0f : actualExplosionTime - Time.deltaTime;
 
-            if (actualTime <= 0.0f)
+            if (actualExplosionTime <= 0.0f)
             {
                 Explode();
             }
         }
         void ResetValues()
         {
-            actualTime = timeToExplode;
+            actualExplosionTime = timeToExplode;
+            actualExplodingTime = timeExploding;
             explodedByAnotherBomb = false;
+            mr.enabled = true;
         }
 
-        void Explode()
-        {
-            sc.enabled = true;
-        }
         void HasExploded()
 		{
             if (sc.enabled)
 			{
- 				for (int i = 0; i < destroyableList.Count; i++)
-				{
-                    destroyableList[i].DestroyItSelf();
-				}
+                actualExplodingTime = (actualExplodingTime - Time.deltaTime <= 0.0f) ? 0.0f : actualExplodingTime - Time.deltaTime;
 
-				destroyableList.Clear();
-				sc.enabled = false;
-				ResetValues();
-				gameObject.SetActive(false);
-			}
+                if (actualExplodingTime <= 0.0f)
+                {
+                    sc.enabled = false;
+                    ResetValues();
+                    gameObject.SetActive(false);
+                }
+            }
 		}
     }
 }

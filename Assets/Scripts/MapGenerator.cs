@@ -20,6 +20,12 @@ namespace NewBomberman
         [SerializeField] GameObject prefabUnbreakableBlock = null;
         [SerializeField] GameObject prefabBreakableBlock = null;
 
+        [Header("Parent Elements")]
+        [SerializeField] GameObject parentTiles = null;
+        [SerializeField] GameObject parentBorder = null;
+        [SerializeField] GameObject parentUnbreakableBlocks = null;
+        [SerializeField] GameObject parentBreakableBlocks = null;
+
         [Header("Configuration")]
         [SerializeField] Vector3 distanceFromEnemyToGround = Vector3.zero; // Distancia del piso para el enemigo.
 
@@ -71,7 +77,7 @@ namespace NewBomberman
             {
                 for (int j = 0; j < stringMap[i].Length; j++)
                 {
-                    tileMap[i, j] = Instantiate(prefabTile);
+                    tileMap[i, j] = Instantiate(prefabTile, parentTiles.transform);
                     tileMap[i, j].transform.position = new Vector3(j, -transform.localScale.y / 2.0f, -i);
                 }
             }
@@ -129,15 +135,15 @@ namespace NewBomberman
             // Instancio el bloque correspondiente.
             if (blockType == unbreakableBlock)
             {
-                newBlock = Instantiate(prefabUnbreakableBlock);
+                newBlock = Instantiate(prefabUnbreakableBlock, parentUnbreakableBlocks.transform);
             }
             else if (blockType == breakableBlock)
             {
-                newBlock = Instantiate(prefabBreakableBlock);
+                newBlock = Instantiate(prefabBreakableBlock, parentBreakableBlocks.transform);
             }
             else if (blockType == border)
             {
-                newBlock = Instantiate(prefabBorderBlock);
+                newBlock = Instantiate(prefabBorderBlock, parentBorder.transform);
             }
 
             // Para evitar errores si se intenta mover la posición de un objeto nulo.

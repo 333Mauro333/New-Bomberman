@@ -9,7 +9,7 @@ namespace NewBomberman
     {
         public static Action<int> onScoreChange;
 
-        GameManager gm = null;
+        GameManager gm;
 
         int points;
 

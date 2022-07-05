@@ -13,17 +13,24 @@ namespace NewBomberman
 
         float actualTime;
         bool explodedByAnotherBomb;
-        
+
+        SphereCollider sc;
+
+        List<IDestroyable> destroyableList;
+
 
 
         void Awake()
         {
             actualTime = timeToExplode;
             explodedByAnotherBomb = false;
+            sc = GetComponent<SphereCollider>();
+            destroyableList = new List<IDestroyable>();
         }
 
         void Update()
         {
+            HasExploded();
             SubtractTime();
         }
 
@@ -37,8 +44,7 @@ namespace NewBomberman
 
                 if (id != null)
 				{
-                    Debug.Log("Objeto detectado: " + raycastHit.transform.gameObject.name);
-                    //id.DestroyItSelf();
+                    destroyableList.Add(id);
 				}
             }
 		}
@@ -62,34 +68,6 @@ namespace NewBomberman
                 Explode();
             }
         }
-        void SeekAndDestroy()
-        {
-            List<IDestroyable> destroyableGameObjects = new List<IDestroyable>();
-            Vector3 diff = new Vector3(0.0f, 0.25f, 0.0f);
-            RaycastHit ray;
-
-
-            for (int i = 0; i < 4; i++)
-            {
-                Vector3 vectorD = GetVectorDirection((Direction)i);
-
-                if (Physics.Raycast(transform.position + diff, vectorD, out ray, range))
-                {
-                    IDestroyable iD = ray.transform.gameObject.GetComponent<IDestroyable>();
-
-
-                    if (iD != null)
-                    {
-                        destroyableGameObjects.Add(iD);
-                    }
-                }
-            }
-
-            for (int i = 0; i < destroyableGameObjects.Count; i++)
-            {
-                destroyableGameObjects[i].DestroyItSelf();
-            }
-        }
         void ResetValues()
         {
             actualTime = timeToExplode;
@@ -98,36 +76,22 @@ namespace NewBomberman
 
         void Explode()
         {
-            SeekAndDestroy();
-            ResetValues();
-            gameObject.SetActive(false);
+            sc.enabled = true;
         }
+        void HasExploded()
+		{
+            if (sc.enabled)
+			{
+ 				for (int i = 0; i < destroyableList.Count; i++)
+				{
+                    destroyableList[i].DestroyItSelf();
+				}
 
-        Vector3 GetVectorDirection(Direction direction)
-        {
-            Vector3 vectorToReturn = Vector3.zero;
-
-
-            switch (direction)
-            {
-                case Direction.Up:
-                    vectorToReturn = transform.forward;
-                    break;
-
-                case Direction.Down:
-                    vectorToReturn = -transform.forward;
-                    break;
-
-                case Direction.Left:
-                    vectorToReturn = -transform.right;
-                    break;
-
-                case Direction.Right:
-                    vectorToReturn = transform.right;
-                    break;
-            }
-
-            return vectorToReturn;
-        }
+				destroyableList.Clear();
+				sc.enabled = false;
+				ResetValues();
+				gameObject.SetActive(false);
+			}
+		}
     }
 }

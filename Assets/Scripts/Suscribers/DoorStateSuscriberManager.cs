@@ -12,6 +12,7 @@ namespace NewBomberman
         [SerializeField] Door d = null;
         [SerializeField] DoorTextController dtc = null;
         [SerializeField] EnemyMovement em = null;
+        [SerializeField] LightController lc = null;
 
 
 
@@ -20,6 +21,7 @@ namespace NewBomberman
             k.pickedEvent += d.ConvertColliderToTrigger;
             k.pickedEvent += dtc.ChangeDoorStateMessage;
             k.pickedEvent += em.StartToFollow;
+            k.pickedEvent += lc.SwitchColor;
         }
 
         void OnDisable()
@@ -27,6 +29,7 @@ namespace NewBomberman
             k.pickedEvent -= d.ConvertColliderToTrigger;
             k.pickedEvent -= dtc.ChangeDoorStateMessage;
             k.pickedEvent -= em.StartToFollow;
+            k.pickedEvent += lc.SwitchColor;
         }
     }
 }

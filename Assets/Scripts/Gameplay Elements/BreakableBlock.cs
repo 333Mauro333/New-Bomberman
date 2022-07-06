@@ -21,14 +21,6 @@ namespace NewBomberman
             p = FindObjectOfType<Player>();
         }
 
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
-            {
-                DestroyItSelf();
-            }
-        }
-
         void OnTriggerEnter(Collider other)
         {
             IExploiter ie = other.gameObject.GetComponent<IExploiter>();

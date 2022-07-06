@@ -3,9 +3,9 @@ XP ---- U  --       --- X
 X U U U U U U U   U  -UUX
 X----   U --   -       -X
 X U U UUUUU U U   U   U X
-X --   ---    -E      - X
+X --   ---    -       - X
 X-U U UUUUU U U   U   UUX
-X- ---  U  ----       --X
-X-U U U U U U U U U---U-XXXXXX
-X - --K-U---- -   UUUUU-D    X
+X- ---  UEU----       --X
+X-U U U UUU U U U U---U-XXXXXX
+X - --K-U  -- -   UUUUU-D    X
 XXXXXXXXXXXXXXXXXXXXXXXXXXXX X

@@ -12,10 +12,18 @@ namespace NewBomberman
         [SerializeField] float speed = 0.0f;
 
 
+        bool follow;
 
-        void Update()
+
+
+		void Awake()
+		{
+            follow = false;
+		}
+
+		void Update()
         {
-            if (target != null)
+            if (target != null && follow)
             {
                 transform.LookAt(target);
             }
@@ -23,7 +31,7 @@ namespace NewBomberman
 
         void FixedUpdate()
         {
-            if (target != null)
+            if (target != null && follow)
             {
                 transform.position += transform.forward * speed * Time.deltaTime;
             }
@@ -31,13 +39,9 @@ namespace NewBomberman
 
 
 
-        public void SetTarget(Transform target)
-        {
-            this.target = target;
-        }
-        public bool HasTarget()
-        {
-            return target != null;
-        }
+        public void StartToFollow()
+		{
+            follow = true;
+		}
     }
 }

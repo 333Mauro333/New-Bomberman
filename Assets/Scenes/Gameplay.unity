@@ -733,6 +733,7 @@ MonoBehaviour:
   k: {fileID: 418905245}
   d: {fileID: 1944873898}
   dtc: {fileID: 930349750}
+  em: {fileID: 1893675689}
 --- !u!1 &867576110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,7 +1221,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.5
+  m_fontSize: 27.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1530,8 +1531,8 @@ MonoBehaviour:
   downButtonName: RHPlayerDown
   leftButtonName: RHPlayerLeft
   rightButtonName: RHPlayerRight
-  forwardSpeed: 3
-  lateralSpeed: 3
+  forwardSpeed: 2
+  lateralSpeed: 2
   backwardsGoesHalfSpeed: 0
 --- !u!114 &1316869771
 MonoBehaviour:
@@ -1787,7 +1788,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.5
+  m_fontSize: 27.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2041,6 +2042,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 856718233670260312, guid: 0bf17f39e40bb2a4eb14708c3d5c8894, type: 3}
+      propertyPath: speed
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 856718233670260312, guid: 0bf17f39e40bb2a4eb14708c3d5c8894, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1316869769}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bf17f39e40bb2a4eb14708c3d5c8894, type: 3}
 --- !u!114 &1893675689 stripped

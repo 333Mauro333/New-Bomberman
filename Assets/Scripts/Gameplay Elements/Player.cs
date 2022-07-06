@@ -28,10 +28,24 @@ namespace NewBomberman
         void OnTriggerEnter(Collider other)
         {
             IPickable iP = other.gameObject.GetComponent<IPickable>();
+            IExploiter ie = other.gameObject.GetComponent<IExploiter>();
 
             if (iP != null)
             {
                 iP.Pick();
+            }
+
+            if (ie != null)
+			{
+                RaycastHit raycastHit;
+
+                if (Physics.Raycast(transform.position, other.transform.position - transform.position, out raycastHit, ie.GetExplosionRange()))
+                {
+                    if (raycastHit.transform.gameObject.tag == "Bomb")
+					{
+                        DestroyItSelf();
+                    }
+                }
             }
 
             if (other.gameObject.CompareTag("Door"))

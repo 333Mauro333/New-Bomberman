@@ -39,15 +39,11 @@ namespace NewBomberman
 
                 if (Physics.Raycast(transform.position, other.transform.position - transform.position, out raycastHit, ie.GetExplosionRange()))
                 {
-                    Debug.Log("----------------------------------------------------------------");
-                    Debug.Log("YO SOY: " + gameObject.name + ". MI POSICIÓN: " + transform.position);
-                    Debug.Log("Objeto detectado: " + raycastHit.transform.gameObject.name + ". Posición: " + raycastHit.transform.position);
-                    Debug.Log("----------------------------------------------------------------");
-                    //if (raycastHit.transform.gameObject.tag == bombTag)
-                    //{
-                    //    DestroyItSelf();
-                    //}
-                }
+					if (raycastHit.transform.gameObject.tag == bombTag)
+					{
+						DestroyItSelf();
+					}
+				}
             }
         }
 
